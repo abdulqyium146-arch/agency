@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FCD34D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2235;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D1117;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3B82F6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background (transparent for real use, dark rect for preview) -->
+  <rect width="520" height="120" fill="#050810" rx="12"/>
+
+  <!-- Icon mark: rounded square -->
+  <rect x="16" y="16" width="88" height="88" rx="18" fill="url(#iconBg)" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+
+  <!-- Location pin base (map marker) -->
+  <path d="M60 28 C48 28 39 37 39 49 C39 62 60 84 60 84 C60 84 81 62 81 49 C81 37 72 28 60 28Z"
+        fill="url(#blueGrad)" filter="url(#glow)" opacity="0.15"/>
+  <path d="M60 30 C49 30 41 38 41 49 C41 61 60 81 60 81 C60 81 79 61 79 49 C79 38 71 30 60 30Z"
+        fill="none" stroke="url(#blueGrad)" stroke-width="2.5"/>
+  <circle cx="60" cy="49" r="7" fill="url(#goldGrad)" filter="url(#glow)"/>
+
+  <!-- Growth arrow trending up — overlaid on pin -->
+  <polyline points="41,70 51,60 59,65 72,50 79,55"
+            fill="none" stroke="url(#goldGrad)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="79,55 73,47 82,46" fill="url(#goldGrad)"/>
+
+  <!-- SBMP wordmark -->
+  <!-- S -->
+  <text x="122" y="72"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="54"
+        font-weight="700"
+        letter-spacing="-1"
+        fill="url(#goldGrad)"
+        filter="url(#glow)">S</text>
+
+  <!-- BMP -->
+  <text x="155" y="72"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="54"
+        font-weight="700"
+        letter-spacing="-1"
+        fill="#F9FAFB">BMP</text>
+
+  <!-- Thin separator line -->
+  <rect x="122" y="80" width="268" height="1.5" rx="1" fill="url(#blueGrad)" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="123" y="100"
+        font-family="'Arial', sans-serif"
+        font-size="13"
+        font-weight="400"
+        letter-spacing="3.5"
+        fill="#9CA3AF">LOCAL DIGITAL MARKETING</text>
+
+  <!-- UK flag dot accent top right of icon -->
+  <circle cx="94" cy="22" r="7" fill="#1a2235" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+  <text x="94" y="26" font-size="9" text-anchor="middle" fill="#F9FAFB">🇬🇧</text>
+</svg>

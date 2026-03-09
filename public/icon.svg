@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#FCD34D"/>
+    </linearGradient>
+    <linearGradient id="blueG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2235"/>
+      <stop offset="100%" style="stop-color:#0D1117"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="14" fill="url(#bgG)"/>
+  <rect width="64" height="64" rx="14" fill="none" stroke="rgba(59,130,246,0.35)" stroke-width="1.5"/>
+
+  <!-- Location pin shape -->
+  <path d="M32 10 C23 10 16 17 16 26 C16 37 32 54 32 54 C32 54 48 37 48 26 C48 17 41 10 32 10Z"
+        fill="url(#blueG)" opacity="0.18"/>
+  <path d="M32 12 C24 12 18 18 18 26 C18 36 32 52 32 52 C32 52 46 36 46 26 C46 18 40 12 32 12Z"
+        fill="none" stroke="url(#blueG)" stroke-width="2.2"/>
+  <!-- Pin inner dot -->
+  <circle cx="32" cy="26" r="5.5" fill="url(#goldG)"/>
+
+  <!-- Trending arrow at bottom -->
+  <polyline points="17,46 24,38 30,43 40,33 46,38"
+            fill="none" stroke="url(#goldG)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="46,38 40.5,31.5 47.5,31" fill="url(#goldG)"/>
+</svg>
