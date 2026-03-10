@@ -86,9 +86,7 @@ export default function HeroSection() {
             {/* Trust bullets */}
             <ul className="space-y-3 mb-8">
               {[
-                "20-Year High-Authority Domain",
                 "Results in 30–90 Days Guaranteed",
-                "No Long-Term Contracts",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span style={{ color: "#22C55E", fontSize: "1.125rem" }}>✅</span>

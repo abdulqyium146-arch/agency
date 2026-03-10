@@ -1,25 +1,10 @@
 import { MetadataRoute } from "next";
+import { cities, industriesSlugs, servicesSlugs } from "@/lib/data";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
-const cities = [
-  "birmingham", "manchester", "leeds", "sheffield", "bristol",
-  "leicester", "nottingham", "liverpool", "newcastle", "cardiff",
-  "edinburgh", "glasgow", "brighton", "southampton", "coventry",
-  "hull", "derby", "stoke", "preston", "oxford",
-];
-
-const industries = [
-  "plumbers", "electricians", "dentists", "solicitors", "estate-agents",
-  "cleaners", "builders", "landscapers", "driving-schools", "physiotherapists",
-  "locksmiths", "accountants", "car-detailing", "car-valeting",
-  "auto-locksmiths", "car-locksmiths", "home-locksmiths",
-  "gutter-cleaning", "jet-washing",
-];
-
-const services = [
-  "local-seo", "google-ads", "web-design", "social-media", "reputation",
-];
+const services = servicesSlugs;
+const industries = industriesSlugs;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

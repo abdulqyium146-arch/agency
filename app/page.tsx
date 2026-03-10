@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+import { generateOrganizationSchema, generateAggregateRatingSchema, generateWebPageSchema } from "@/lib/schemas";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -6,59 +8,66 @@ import WhyChooseMeSection from "@/components/sections/WhyChooseMeSection";
 import StatsSection from "@/components/sections/StatsSection";
 import PricingSection from "@/components/sections/PricingSection";
 import IndustriesSection from "@/components/sections/IndustriesSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import ProcessSection from "@/components/sections/ProcessSection";
-import CitiesSection from "@/components/sections/CitiesSection";
-import FAQSection from "@/components/sections/FAQSection";
-import FinalCTASection from "@/components/sections/FinalCTASection";
+
+// Dynamically import below-the-fold sections for better Core Web Vitals
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"));
+const ProcessSection = dynamic(() => import("@/components/sections/ProcessSection"));
+const CitiesSection = dynamic(() => import("@/components/sections/CitiesSection"));
+const FAQSection = dynamic(() => import("@/components/sections/FAQSection"));
+const FinalCTASection = dynamic(() => import("@/components/sections/FinalCTASection"));
+
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
 export const metadata: Metadata = {
   title: "UK Local Digital Marketing Expert | Get More Customers",
   description:
     "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses. No contracts. Free audit worth £299.",
+  keywords: [
+    "local SEO UK",
+    "local digital marketing",
+    "Google Business Profile",
+    "UK service business marketing",
+    "local SEO agency",
+    "digital marketing",
+  ],
+  alternates: {
+    canonical: BASE_URL,
+  },
+  openGraph: {
+    title: "UK Local Digital Marketing Expert | Get More Customers",
+    description:
+      "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
+    url: BASE_URL,
+    type: "website",
+    siteName: "SBMP — Local Digital Marketing",
+    images: [
+      {
+        url: `${BASE_URL}/sbmp-logo.png`,
+        width: 1200,
+        height: 630,
+        alt: "SBMP — Local Digital Marketing",
+      },
+    ],
+  },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "LocalBusiness",
-      name: "Small Business Marketing Professional",
-      url: "https://smallbusinessmarketingprofessional.com",
-      telephone: "03474825228",
-      priceRange: "££",
-      areaServed: "United Kingdom",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "127",
-      },
-    },
-    {
-      "@type": "Person",
-      name: "Small Business Marketing Professional",
-      jobTitle: "Local Digital Marketing Expert",
-      knowsAbout: [
-        "Local SEO",
-        "Google Ads",
-        "Web Design",
-        "Social Media Marketing",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      url: "https://smallbusinessmarketingprofessional.com",
-      name: "Small Business Marketing Professional",
-    },
-  ],
-};
+// Enhanced JSON-LD schemas for AI understanding and rich snippets
+const organizationSchema = generateOrganizationSchema();
+const ratingSchema = generateAggregateRatingSchema("SBMP — Small Business Marketing Professional", 4.9, 150);
+const webPageSchema = generateWebPageSchema(
+  "UK Local Digital Marketing Expert | Get More Customers",
+  "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
+  BASE_URL
+);
+
+const jsonLd = [organizationSchema, ratingSchema, webPageSchema];
 
 export default function HomePage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.length > 1 ? jsonLd : jsonLd[0]) }}
       />
       <HeroSection />
       <TrustBar />

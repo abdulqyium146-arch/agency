@@ -1,118 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { services, servicesSlugs } from "@/lib/data";
+import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schemas";
 
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
-interface ServiceData {
-  title: string;
-  icon: string;
-  tagline: string;
-  description: string;
-  benefits: string[];
-  results: string;
-  price: string;
-}
-
-const services: Record<string, ServiceData> = {
-  "local-seo": {
-    title: "Local SEO & Google Rankings",
-    icon: "📍",
-    tagline:
-      "Get your business to page 1 of Google when local customers search for your services.",
-    description:
-      "Local SEO is the single most powerful long-term strategy for UK service businesses. When someone in your area searches for 'plumber near me' or 'best dentist in Manchester', you want to be at the top. I use proven local SEO methods developed over 20 years to get you there — and keep you there.",
-    benefits: [
-      "Google Business Profile full optimisation",
-      "Maps 3-pack ranking strategy",
-      "Local citation building & cleanup",
-      "Geo-targeted keyword content",
-      "Competitor analysis & gap strategy",
-      "Monthly ranking reports",
-    ],
-    results:
-      "Most clients see ranking movement within 30–60 days, with strong page-1 positions by month 3.",
-    price: "From £199/month",
-  },
-  "google-ads": {
-    title: "Google Ads & PPC Management",
-    icon: "🎯",
-    tagline:
-      "Instant page-1 visibility with ROI-tracked campaigns that bring in ready-to-buy customers.",
-    description:
-      "Google Ads done right can deliver immediate results while your SEO builds. Done wrong, it's an expensive lesson. I've managed Google Ads campaigns for UK service businesses since 2004 — I know how to eliminate wasted spend and maximise your return on every pound.",
-    benefits: [
-      "Instant page-1 Google visibility",
-      "Zero wasted ad spend",
-      "Negative keyword management",
-      "Ad copy split testing",
-      "Conversion tracking setup",
-      "Weekly performance reports",
-    ],
-    results: "Most clients see leads within the first week of campaigns going live.",
-    price: "From £299/month + ad spend",
-  },
-  "web-design": {
-    title: "High-Converting Website Design",
-    icon: "💻",
-    tagline:
-      "Professional websites built to turn visitors into paying customers — fast, mobile-first, SEO-ready.",
-    description:
-      "Your website is your 24/7 salesperson. It needs to load fast, look professional on every device, and be built with SEO baked in from the ground up. I build websites for UK service businesses that generate real enquiries — not just pretty pages that nobody finds.",
-    benefits: [
-      "Mobile-first responsive design",
-      "Sub-2 second load speed",
-      "SEO architecture built-in",
-      "Lead capture & contact forms",
-      "Google Analytics setup",
-      "Hosted on your own domain",
-    ],
-    results:
-      "New websites typically see a 40–80% improvement in enquiry rates within the first month.",
-    price: "From £799 one-time or included in Pro plan",
-  },
-  "social-media": {
-    title: "Social Media Marketing",
-    icon: "📱",
-    tagline:
-      "Build a loyal local following that brings you consistent new customers every month.",
-    description:
-      "Social media for service businesses isn't about going viral. It's about building trust with your local community, showcasing your work, and staying top of mind when someone needs your services. I manage Facebook and Instagram for UK service businesses — consistently, professionally, and with results you can measure.",
-    benefits: [
-      "Facebook & Instagram management",
-      "3+ posts per week minimum",
-      "Local audience targeting",
-      "Review & reputation content",
-      "Story and reel creation",
-      "Monthly engagement reports",
-    ],
-    results:
-      "Consistent social media management typically leads to 20–40% more local brand recognition within 90 days.",
-    price: "From £249/month",
-  },
-  reputation: {
-    title: "Reputation Management",
-    icon: "⭐",
-    tagline:
-      "Build, protect, and grow your online reputation to win more trust and more customers.",
-    description:
-      "In today's world, your online reviews are your most powerful sales tool. A business with 50 five-star reviews will win over a business with 5 — every single time. I help UK service businesses build a strong review profile ethically, respond to all feedback professionally, and amplify their trust signals across the web.",
-    benefits: [
-      "Google review generation campaigns",
-      "Review response management",
-      "Brand monitoring & alerts",
-      "Trust signal amplification",
-      "Negative review strategy",
-      "Trustpilot & industry review sites",
-    ],
-    results: "Most clients double their Google review count within 60 days.",
-    price: "From £149/month or included in Growth/Pro plans",
-  },
-};
-
 export async function generateStaticParams() {
-  return Object.keys(services).map((slug) => ({ slug }));
+  return servicesSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -123,9 +20,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services[slug];
   if (!service) return {};
+
   return {
     title: `${service.title} for UK Service Businesses`,
     description: `${service.tagline} Expert UK local digital marketing since 2004. ${service.price}.`,
+    keywords: [
+      service.title.toLowerCase(),
+      "UK service business",
+      "digital marketing",
+      "local marketing",
+      service.price,
+    ],
+    alternates: {
+      canonical: `${BASE_URL}/services/${slug}`,
+    },
+    openGraph: {
+      title: `${service.title} for UK Service Businesses`,
+      description: `${service.tagline} Expert UK digital marketing.`,
+      url: `${BASE_URL}/services/${slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -138,8 +52,20 @@ export default async function ServicePage({
   const service = services[slug];
   if (!service) notFound();
 
+  // Generate schemas for AI understanding
+  const serviceSchema = generateServiceSchema(service.title, service.description, service.price);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: BASE_URL },
+    { name: "Services", url: `${BASE_URL}/services` },
+    { name: service.title },
+  ]);
+
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
+      />
       {/* Hero */}
       <section
         style={{

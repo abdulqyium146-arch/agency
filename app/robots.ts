@@ -14,23 +14,6 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/",
         ],
       },
-      // Block AI scrapers
-      {
-        userAgent: "GPTBot",
-        disallow: "/",
-      },
-      {
-        userAgent: "ChatGPT-User",
-        disallow: "/",
-      },
-      {
-        userAgent: "CCBot",
-        disallow: "/",
-      },
-      {
-        userAgent: "anthropic-ai",
-        disallow: "/",
-      },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
     host: BASE_URL,

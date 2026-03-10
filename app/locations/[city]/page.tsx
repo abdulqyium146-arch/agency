@@ -1,72 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cities, getLocationTestimonial, getIndustryPluralDisplayList, capitalize } from "@/lib/data";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/schemas";
 
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
-const cities = [
-  "birmingham",
-  "manchester",
-  "leeds",
-  "sheffield",
-  "bristol",
-  "leicester",
-  "nottingham",
-  "liverpool",
-  "newcastle",
-  "cardiff",
-  "edinburgh",
-  "glasgow",
-  "brighton",
-  "southampton",
-  "coventry",
-  "hull",
-  "derby",
-  "stoke",
-  "preston",
-  "oxford",
-];
-
-const industries = [
-  "Plumbers",
-  "Electricians",
-  "Dentists",
-  "Solicitors",
-  "Estate Agents",
-  "Cleaners",
-  "Builders",
-  "Landscapers",
-  "Driving Schools",
-  "Physiotherapists",
-  "Locksmiths",
-  "Accountants",
-];
-
-const testimonials: Record<string, { quote: string; name: string; business: string }> = {
-  birmingham: {
-    quote:
-      "Within 8 weeks I went from page 4 to position #1 for 'plumber Birmingham'. The phone hasn't stopped ringing since.",
-    name: "Dave T.",
-    business: "Plumber, Birmingham",
-  },
-  manchester: {
-    quote:
-      "I was sceptical at first but the results speak for themselves. We're now getting 3x the calls we used to get. Absolutely brilliant.",
-    name: "Sarah M.",
-    business: "Cleaning Company, Manchester",
-  },
-  leeds: {
-    quote:
-      "Michelle helped us completely transform our online presence. We went from zero Google reviews to 47 in two months.",
-    name: "James R.",
-    business: "Electrician, Leeds",
-  },
-};
-
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+const industries = getIndustryPluralDisplayList();
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ city }));
@@ -80,9 +22,26 @@ export async function generateMetadata({
   const { city } = await params;
   if (!cities.includes(city)) return {};
   const cityName = capitalize(city);
+
   return {
     title: `Local Digital Marketing in ${cityName} | Expert SEO & Google Ads`,
     description: `Get your ${cityName} service business to page 1 of Google. Expert local SEO, Google Ads & web design for ${cityName} businesses. From £199/month. Free audit.`,
+    keywords: [
+      `local SEO ${cityName}`,
+      `digital marketing ${cityName}`,
+      `Google Business Profile ${cityName}`,
+      `SEO agency ${cityName}`,
+      `${cityName} local marketing`,
+    ],
+    alternates: {
+      canonical: `${BASE_URL}/locations/${city}`,
+    },
+    openGraph: {
+      title: `Local Digital Marketing in ${cityName} | Expert SEO & Google Ads`,
+      description: `Get your ${cityName} service business to page 1 of Google. Expert local SEO, Google Ads & web design.`,
+      url: `${BASE_URL}/locations/${city}`,
+      type: "website",
+    },
   };
 }
 
@@ -95,17 +54,22 @@ export default async function CityPage({
   if (!cities.includes(city)) notFound();
 
   const cityName = capitalize(city);
-  const testimonial =
-    testimonials[city] ||
-    {
-      quote:
-        "The best investment I've made for my business. Within 90 days we were ranking on page 1 and the leads were coming in consistently.",
-      name: "Mike L.",
-      business: `Local Business, ${cityName}`,
-    };
+  const testimonial = getLocationTestimonial(city);
+
+  // Generate schemas for AI understanding
+  const localBusinessSchema = generateLocalBusinessSchema(cityName);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: BASE_URL },
+    { name: "Locations", url: `${BASE_URL}/locations` },
+    { name: cityName },
+  ]);
 
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema]) }}
+      />
       {/* Hero */}
       <section
         style={{

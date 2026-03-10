@@ -132,8 +132,18 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#080D1A" />
+        {/* Font optimization for Core Web Vitals */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+        {/* Preload critical fonts to improve FCP/LCP */}
+        <link
+          rel="preload"
+          as="font"
+          href="/fonts/display-font.woff2"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="antialiased">
         <AnnouncementBar />

@@ -1,18 +1,46 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import { generateContactPointSchema, generateBreadcrumbSchema } from "@/lib/schemas";
+
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
+const WA_LINK =
+  "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
 export const metadata: Metadata = {
   title: "Contact | Get Your Free SEO Audit Today",
   description:
-    "Get in touch for your free local SEO audit. WhatsApp, call, or fill in the form. Usually responds within 2 hours. Serving all UK businesses.",
+    "Get a free SEO audit worth £299. No obligation, no hard sell. Chat with us via WhatsApp or fill out the contact form. We're here to help UK service businesses grow.",
+  keywords: ["contact SBMP", "free SEO audit", "UK digital marketing", "local SEO help"],
+  alternates: {
+    canonical: `${BASE_URL}/contact`,
+  },
+  openGraph: {
+    title: "Contact | Get Your Free SEO Audit Today",
+    description:
+      "Get a free SEO audit worth £299. No obligation, no hard sell. Chat with us via WhatsApp or fill out the contact form.",
+    url: `${BASE_URL}/contact`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contact | Get Your Free SEO Audit Today",
+    description: "Get a free SEO audit. No obligation, no hard sell.",
+  },
 };
 
-const WA_LINK =
-  "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
-
 export default function ContactPage() {
+  const contactPointSchema = generateContactPointSchema();
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: BASE_URL },
+    { name: "Contact" },
+  ]);
+
   return (
     <div style={{ backgroundColor: "#080D1A" }} className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([contactPointSchema, breadcrumbSchema]) }}
+      />
       {/* Hero strip */}
       <div
         style={{

@@ -1,66 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { industries, industriesSlugs, pricingPlans, getSingularName } from "@/lib/data";
+import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schemas";
 
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
-interface IndustryData {
-  name: string;
-  icon: string;
-  plural: string;
-  searchTerm: string;
-}
-
-const industries: Record<string, IndustryData> = {
-  plumbers: { name: "Plumbers", icon: "🔧", plural: "Plumbing Businesses", searchTerm: "plumber near me" },
-  electricians: { name: "Electricians", icon: "⚡", plural: "Electrical Businesses", searchTerm: "electrician near me" },
-  dentists: { name: "Dentists", icon: "🦷", plural: "Dental Practices", searchTerm: "dentist near me" },
-  solicitors: { name: "Solicitors", icon: "⚖️", plural: "Solicitor Firms", searchTerm: "solicitor near me" },
-  "estate-agents": { name: "Estate Agents", icon: "🏠", plural: "Estate Agent Businesses", searchTerm: "estate agent near me" },
-  cleaners: { name: "Cleaners", icon: "🧹", plural: "Cleaning Businesses", searchTerm: "cleaner near me" },
-  builders: { name: "Builders", icon: "🏗️", plural: "Building Businesses", searchTerm: "builder near me" },
-  landscapers: { name: "Landscapers", icon: "🌿", plural: "Landscaping Businesses", searchTerm: "landscaper near me" },
-  "driving-schools": { name: "Driving Schools", icon: "🚗", plural: "Driving Schools", searchTerm: "driving school near me" },
-  physiotherapists: { name: "Physiotherapists", icon: "💊", plural: "Physiotherapy Practices", searchTerm: "physiotherapist near me" },
-  locksmiths: { name: "Locksmiths", icon: "🔐", plural: "Locksmith Businesses", searchTerm: "locksmith near me" },
-  accountants: { name: "Accountants", icon: "💼", plural: "Accounting Firms", searchTerm: "accountant near me" },
-  "car-detailing": { name: "Car Detailing", icon: "✨", plural: "Car Detailing Businesses", searchTerm: "car detailing near me" },
-  "car-valeting": { name: "Car Valeting", icon: "🚘", plural: "Car Valeting Businesses", searchTerm: "car valeting near me" },
-  "auto-locksmiths": { name: "Auto Locksmiths", icon: "🔑", plural: "Auto Locksmith Businesses", searchTerm: "auto locksmith near me" },
-  "car-locksmiths": { name: "Car Locksmiths", icon: "🚪", plural: "Car Locksmith Businesses", searchTerm: "car locksmith near me" },
-  "home-locksmiths": { name: "Home Locksmiths", icon: "🏡", plural: "Home Locksmith Businesses", searchTerm: "home locksmith near me" },
-  "gutter-cleaning": { name: "Gutter Cleaning", icon: "🌧️", plural: "Gutter Cleaning Businesses", searchTerm: "gutter cleaning near me" },
-  "jet-washing": { name: "Jet Washing", icon: "💦", plural: "Jet Washing Businesses", searchTerm: "jet washing near me" },
-};
-
-const plans = [
-  {
-    name: "Starter",
-    price: "£199",
-    period: "/month",
-    color: "#4F8EF7",
-    features: ["Local SEO basics", "Google Business Profile", "Monthly report"],
-  },
-  {
-    name: "Growth",
-    price: "£349",
-    period: "/month",
-    color: "#22C55E",
-    badge: "Most Popular",
-    features: ["Full local SEO", "Google Ads management", "Reputation management", "Bi-weekly reports"],
-  },
-  {
-    name: "Pro",
-    price: "£599",
-    period: "/month",
-    color: "#4F8EF7",
-    features: ["Everything in Growth", "Custom website", "Social media", "Priority support"],
-  },
-];
+const plans = pricingPlans;
 
 export async function generateStaticParams() {
-  return Object.keys(industries).map((slug) => ({ slug }));
+  return industriesSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -71,9 +22,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const industry = industries[slug];
   if (!industry) return {};
+
   return {
     title: `Local SEO & Digital Marketing for ${industry.name} | UK Expert`,
     description: `Expert local digital marketing for UK ${industry.plural}. Get more customers searching '${industry.searchTerm}'. Page 1 results in 30–90 days. Free audit.`,
+    keywords: [
+      `${industry.name.toLowerCase()} SEO`,
+      `${industry.name.toLowerCase()} digital marketing`,
+      `${industry.name.toLowerCase()} local marketing`,
+      industry.searchTerm,
+      `UK ${industry.plural.toLowerCase()}`,
+    ],
+    alternates: {
+      canonical: `${BASE_URL}/industries/${slug}`,
+    },
+    openGraph: {
+      title: `Local SEO & Digital Marketing for ${industry.name} | UK Expert`,
+      description: `Expert local digital marketing for UK ${industry.plural}. Get more customers searching '${industry.searchTerm}'.`,
+      url: `${BASE_URL}/industries/${slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -86,13 +54,26 @@ export default async function IndustryPage({
   const industry = industries[slug];
   if (!industry) notFound();
 
-  // Singular name (remove trailing s or use name directly)
-  const singularName = industry.name.endsWith("s") && industry.name !== "Driving Schools"
-    ? industry.name.slice(0, -1)
-    : industry.name;
+  const singularName = getSingularName(industry.name);
+
+  // Generate schemas for AI understanding
+  const serviceSchema = generateServiceSchema(
+    `Digital Marketing for ${industry.name}`,
+    `Expert local digital marketing for UK ${industry.plural}. Get more customers searching '${industry.searchTerm}'.`,
+    "£199"
+  );
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: BASE_URL },
+    { name: "Industries", url: `${BASE_URL}/industries` },
+    { name: industry.name },
+  ]);
 
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
+      />
       {/* Hero */}
       <section
         style={{
