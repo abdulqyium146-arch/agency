@@ -1,0 +1,217 @@
+export interface LocationEntry {
+  city: string;
+  state: string;
+  slug: string;
+  lat: number;
+  lng: number;
+  nearbyCities: string[];
+}
+
+export const locations: LocationEntry[] = [
+  {
+    city: "New York",
+    state: "NY",
+    slug: "new-york-ny",
+    lat: 40.7128,
+    lng: -74.006,
+    nearbyCities: ["newark-nj", "jersey-city-nj", "yonkers-ny", "stamford-ct", "bridgeport-ct"],
+  },
+  {
+    city: "Los Angeles",
+    state: "CA",
+    slug: "los-angeles-ca",
+    lat: 34.0522,
+    lng: -118.2437,
+    nearbyCities: ["long-beach-ca", "anaheim-ca", "santa-ana-ca", "pasadena-ca", "torrance-ca"],
+  },
+  {
+    city: "Chicago",
+    state: "IL",
+    slug: "chicago-il",
+    lat: 41.8781,
+    lng: -87.6298,
+    nearbyCities: ["aurora-il", "naperville-il", "joliet-il", "evanston-il", "schaumburg-il"],
+  },
+  {
+    city: "Houston",
+    state: "TX",
+    slug: "houston-tx",
+    lat: 29.7604,
+    lng: -95.3698,
+    nearbyCities: ["sugar-land-tx", "the-woodlands-tx", "pasadena-tx", "pearland-tx", "katy-tx"],
+  },
+  {
+    city: "Phoenix",
+    state: "AZ",
+    slug: "phoenix-az",
+    lat: 33.4484,
+    lng: -112.074,
+    nearbyCities: ["scottsdale-az", "tempe-az", "mesa-az", "chandler-az", "gilbert-az"],
+  },
+  {
+    city: "Philadelphia",
+    state: "PA",
+    slug: "philadelphia-pa",
+    lat: 39.9526,
+    lng: -75.1652,
+    nearbyCities: ["camden-nj", "wilmington-de", "chester-pa", "norristown-pa", "trenton-nj"],
+  },
+  {
+    city: "San Antonio",
+    state: "TX",
+    slug: "san-antonio-tx",
+    lat: 29.4241,
+    lng: -98.4936,
+    nearbyCities: ["austin-tx", "new-braunfels-tx", "san-marcos-tx", "seguin-tx", "schertz-tx"],
+  },
+  {
+    city: "San Diego",
+    state: "CA",
+    slug: "san-diego-ca",
+    lat: 32.7157,
+    lng: -117.1611,
+    nearbyCities: ["chula-vista-ca", "el-cajon-ca", "escondido-ca", "oceanside-ca", "carlsbad-ca"],
+  },
+  {
+    city: "Dallas",
+    state: "TX",
+    slug: "dallas-tx",
+    lat: 32.7767,
+    lng: -96.797,
+    nearbyCities: ["fort-worth-tx", "arlington-tx", "plano-tx", "irving-tx", "garland-tx"],
+  },
+  {
+    city: "San Jose",
+    state: "CA",
+    slug: "san-jose-ca",
+    lat: 37.3382,
+    lng: -121.8863,
+    nearbyCities: ["santa-clara-ca", "sunnyvale-ca", "fremont-ca", "milpitas-ca", "campbell-ca"],
+  },
+  {
+    city: "Austin",
+    state: "TX",
+    slug: "austin-tx",
+    lat: 30.2672,
+    lng: -97.7431,
+    nearbyCities: ["san-antonio-tx", "round-rock-tx", "cedar-park-tx", "pflugerville-tx", "georgetown-tx"],
+  },
+  {
+    city: "Jacksonville",
+    state: "FL",
+    slug: "jacksonville-fl",
+    lat: 30.3322,
+    lng: -81.6557,
+    nearbyCities: ["st-augustine-fl", "orange-park-fl", "fernandina-beach-fl", "palatka-fl", "brunswick-ga"],
+  },
+  {
+    city: "Fort Worth",
+    state: "TX",
+    slug: "fort-worth-tx",
+    lat: 32.7555,
+    lng: -97.3308,
+    nearbyCities: ["dallas-tx", "arlington-tx", "denton-tx", "north-richland-hills-tx", "mansfield-tx"],
+  },
+  {
+    city: "Columbus",
+    state: "OH",
+    slug: "columbus-oh",
+    lat: 39.9612,
+    lng: -82.9988,
+    nearbyCities: ["dublin-oh", "westerville-oh", "grove-city-oh", "hilliard-oh", "gahanna-oh"],
+  },
+  {
+    city: "Charlotte",
+    state: "NC",
+    slug: "charlotte-nc",
+    lat: 35.2271,
+    lng: -80.8431,
+    nearbyCities: ["concord-nc", "gastonia-nc", "rock-hill-sc", "huntersville-nc", "matthews-nc"],
+  },
+  {
+    city: "Indianapolis",
+    state: "IN",
+    slug: "indianapolis-in",
+    lat: 39.7684,
+    lng: -86.158,
+    nearbyCities: ["carmel-in", "fishers-in", "anderson-in", "greenwood-in", "noblesville-in"],
+  },
+  {
+    city: "San Francisco",
+    state: "CA",
+    slug: "san-francisco-ca",
+    lat: 37.7749,
+    lng: -122.4194,
+    nearbyCities: ["oakland-ca", "berkeley-ca", "san-mateo-ca", "daly-city-ca", "south-san-francisco-ca"],
+  },
+  {
+    city: "Seattle",
+    state: "WA",
+    slug: "seattle-wa",
+    lat: 47.6062,
+    lng: -122.3321,
+    nearbyCities: ["bellevue-wa", "tacoma-wa", "redmond-wa", "kirkland-wa", "renton-wa"],
+  },
+  {
+    city: "Denver",
+    state: "CO",
+    slug: "denver-co",
+    lat: 39.7392,
+    lng: -104.9903,
+    nearbyCities: ["aurora-co", "lakewood-co", "arvada-co", "westminster-co", "boulder-co"],
+  },
+  {
+    city: "Nashville",
+    state: "TN",
+    slug: "nashville-tn",
+    lat: 36.1627,
+    lng: -86.7816,
+    nearbyCities: ["murfreesboro-tn", "franklin-tn", "hendersonville-tn", "clarksville-tn", "smyrna-tn"],
+  },
+  {
+    city: "Oklahoma City",
+    state: "OK",
+    slug: "oklahoma-city-ok",
+    lat: 35.4676,
+    lng: -97.5164,
+    nearbyCities: ["edmond-ok", "norman-ok", "midwest-city-ok", "moore-ok", "yukon-ok"],
+  },
+  {
+    city: "Las Vegas",
+    state: "NV",
+    slug: "las-vegas-nv",
+    lat: 36.1699,
+    lng: -115.1398,
+    nearbyCities: ["henderson-nv", "north-las-vegas-nv", "paradise-nv", "summerlin-nv", "boulder-city-nv"],
+  },
+  {
+    city: "Portland",
+    state: "OR",
+    slug: "portland-or",
+    lat: 45.5051,
+    lng: -122.675,
+    nearbyCities: ["gresham-or", "hillsboro-or", "beaverton-or", "lake-oswego-or", "vancouver-wa"],
+  },
+  {
+    city: "Miami",
+    state: "FL",
+    slug: "miami-fl",
+    lat: 25.7617,
+    lng: -80.1918,
+    nearbyCities: ["hialeah-fl", "miami-gardens-fl", "coral-gables-fl", "miami-beach-fl", "doral-fl"],
+  },
+  {
+    city: "Atlanta",
+    state: "GA",
+    slug: "atlanta-ga",
+    lat: 33.749,
+    lng: -84.388,
+    nearbyCities: ["sandy-springs-ga", "roswell-ga", "marietta-ga", "smyrna-ga", "albany-ga"],
+  },
+];
+
+export function getLocationBySlug(slug: string): LocationEntry | undefined {
+  return locations.find((l) => l.slug === slug);
+}
+
+export const locationSlugs = locations.map((l) => l.slug);

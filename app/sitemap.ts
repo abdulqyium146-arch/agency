@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 import { cities, industriesSlugs, servicesSlugs } from "@/lib/data";
+import { locationSlugs } from "@/data/locations";
+import { serviceSlugs } from "@/data/services";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
@@ -81,11 +83,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  // Local SEO hub page
+  const localSeoHub: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/local-seo`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    },
+  ];
+
+  // Local SEO city pages — one per major US city
+  const localSeoCityPages: MetadataRoute.Sitemap = locationSlugs.map((slug) => ({
+    url: `${BASE_URL}/local-seo/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  // Local SEO service pages — city × service combinations (25 × 12 = 300 pages)
+  const localSeoServicePages: MetadataRoute.Sitemap = locationSlugs.flatMap((locSlug) =>
+    serviceSlugs.map((svcSlug) => ({
+      url: `${BASE_URL}/local-seo/${locSlug}/${svcSlug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  );
+
   return [
     ...staticPages,
     ...servicePages,
     ...locationPages,
     ...automotiveSEOPages,
     ...industryPages,
+    ...localSeoHub,
+    ...localSeoCityPages,
+    ...localSeoServicePages,
   ];
 }
