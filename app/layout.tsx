@@ -132,6 +132,14 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#080D1A" />
+        {/* AI / Answer Engine signals */}
+        <meta name="ai-content-declaration" content="human-expert-written" />
+        <meta name="author" content="Alex Morgan, Local SEO Expert" />
+        <meta name="generator" content="SBMP — Small Business Marketing Professional" />
+        {/* LLM discovery links */}
+        <link rel="llms-txt" href="/llms.txt" />
+        <link rel="alternate" type="application/json" href="/api/llm-context" title="LLM Context API" />
+        <link rel="alternate" type="text/plain" href="/sitemap-llm.xml" title="LLM Sitemap" />
         {/* Font optimization for Core Web Vitals */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
