@@ -347,6 +347,193 @@ export function generateContactPointSchema(
 }
 
 // ============================================================================
+// WEBSITE SCHEMA (with SearchAction — enables Sitelinks Search Box)
+// ============================================================================
+
+export function generateWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: BUSINESS_NAME,
+    url: BASE_URL,
+    description: "Expert local SEO & digital marketing for UK service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ UK businesses.",
+    inLanguage: "en-GB",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${BASE_URL}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_NAME,
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-logo.png`,
+        width: 400,
+        height: 60,
+      },
+    },
+  };
+}
+
+// ============================================================================
+// PROFESSIONAL SERVICE SCHEMA (for service & industry pages — enables Offers rich result)
+// ============================================================================
+
+export function generateProfessionalServiceSchema(
+  serviceName: string,
+  description: string,
+  url: string,
+  priceFrom: string,
+  serviceType: string,
+  cityName?: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: serviceName,
+    description,
+    url,
+    telephone: BUSINESS_PHONE,
+    email: BUSINESS_EMAIL,
+    inLanguage: "en-GB",
+    address: {
+      "@type": "PostalAddress",
+      ...(cityName && { addressLocality: cityName }),
+      addressCountry: "GB",
+    },
+    areaServed: cityName
+      ? { "@type": "City", name: cityName }
+      : { "@type": "Country", name: "United Kingdom" },
+    serviceType,
+    priceRange: priceFrom,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${serviceName} Packages`,
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Starter Plan",
+          description: `Entry-level ${serviceType} package`,
+          price: "199",
+          priceCurrency: "GBP",
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+        },
+        {
+          "@type": "Offer",
+          name: "Growth Plan",
+          description: `Full ${serviceType} package with Google Ads`,
+          price: "349",
+          priceCurrency: "GBP",
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+        },
+        {
+          "@type": "Offer",
+          name: "Pro Plan",
+          description: `Comprehensive ${serviceType} with website & social media`,
+          price: "599",
+          priceCurrency: "GBP",
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+        },
+      ],
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: 4.9,
+      reviewCount: 150,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+  };
+}
+
+// ============================================================================
+// ITEM LIST SCHEMA (for blog index, city lists, service lists)
+// ============================================================================
+
+export function generateItemListSchema(
+  items: Array<{ name: string; url: string; description?: string; position: number }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    numberOfItems: items.length,
+    itemListElement: items.map((item) => ({
+      "@type": "ListItem",
+      position: item.position,
+      name: item.name,
+      url: item.url,
+      ...(item.description && { description: item.description }),
+    })),
+  };
+}
+
+// ============================================================================
+// BLOG POSTING SCHEMA (for blog article cards and individual posts)
+// ============================================================================
+
+export function generateBlogPostingSchema(
+  title: string,
+  description: string,
+  url: string,
+  datePublished: string,
+  articleSection: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    url,
+    datePublished,
+    dateModified: datePublished,
+    inLanguage: "en-GB",
+    author: {
+      "@type": "Organization",
+      name: BUSINESS_NAME,
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_NAME,
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-logo.png`,
+        width: 400,
+        height: 60,
+      },
+    },
+    articleSection,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    image: {
+      "@type": "ImageObject",
+      url: `${BASE_URL}/sbmp-logo.png`,
+      width: 1200,
+      height: 630,
+    },
+  };
+}
+
+// ============================================================================
 // HELPER: Render Schema as JSON
 // ============================================================================
 

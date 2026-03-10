@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cities, capitalize } from "@/lib/data";
-import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schemas";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateFAQSchema, generateWebPageSchema, generateProfessionalServiceSchema, generateAggregateRatingSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
@@ -273,15 +273,29 @@ export default async function AutomotiveSEOPage({
     },
   ];
 
+  const pageUrl = `${BASE_URL}/locations/${city}/automotive-seo`;
+  const pageTitle = `Automotive Local SEO in ${cityName} | Car Repair & Dealership Marketing`;
+  const pageDesc = `Expert automotive local SEO for ${cityName}. Help auto repair shops, dealerships, mechanics & MOT centres rank #1 on Google Maps. Drive more qualified leads. Free audit.`;
+
   const localBusinessSchema = generateLocalBusinessSchema(
     `Automotive Local SEO Services in ${cityName}`
+  );
+  const professionalServiceSchema = generateProfessionalServiceSchema(
+    `Automotive Local SEO in ${cityName}`,
+    pageDesc,
+    pageUrl,
+    "From £199/month",
+    "Automotive Local SEO",
+    cityName
   );
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: BASE_URL },
     { name: "Locations", url: `${BASE_URL}/locations` },
-    { name: cityName },
+    { name: cityName, url: `${BASE_URL}/locations/${city}` },
     { name: "Automotive SEO" },
   ]);
+  const webPageSchema = generateWebPageSchema(pageTitle, pageDesc, pageUrl);
+  const ratingSchema = generateAggregateRatingSchema(`Automotive SEO ${cityName}`, 4.9, 150);
   const faqSchema = generateFAQSchema(faqs);
 
   return (
@@ -289,7 +303,7 @@ export default async function AutomotiveSEOPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([localBusinessSchema, breadcrumbSchema, faqSchema]),
+          __html: JSON.stringify([localBusinessSchema, professionalServiceSchema, breadcrumbSchema, webPageSchema, ratingSchema, faqSchema]),
         }}
       />
 

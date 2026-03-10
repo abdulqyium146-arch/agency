@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cities, getLocationTestimonial, getIndustryPluralDisplayList, capitalize } from "@/lib/data";
-import { generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/schemas";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateWebPageSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
@@ -56,19 +56,42 @@ export default async function CityPage({
   const cityName = capitalize(city);
   const testimonial = getLocationTestimonial(city);
 
-  // Generate schemas for AI understanding
+  const pageUrl = `${BASE_URL}/locations/${city}`;
+  const pageTitle = `Local Digital Marketing in ${cityName}`;
+  const pageDesc = `Get your ${cityName} service business to page 1 of Google. Expert local SEO, Google Ads & web design for ${cityName} businesses. From £199/month. Free audit.`;
+
   const localBusinessSchema = generateLocalBusinessSchema(cityName);
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: BASE_URL },
     { name: "Locations", url: `${BASE_URL}/locations` },
     { name: cityName },
   ]);
+  const webPageSchema = generateWebPageSchema(pageTitle, pageDesc, pageUrl);
+  const ratingSchema = generateAggregateRatingSchema(`Local Digital Marketing ${cityName}`, 4.9, 150);
+  const faqSchema = generateFAQSchema([
+    {
+      question: `How can local SEO help my business in ${cityName}?`,
+      answer: `Local SEO gets your ${cityName} business ranking at the top of Google when nearby customers search for your services. More visibility means more calls, bookings, and consistent revenue — typically within 30–90 days.`,
+    },
+    {
+      question: `How long does it take to rank on page 1 in ${cityName}?`,
+      answer: `Most ${cityName} businesses see early ranking movement within 30–60 days. Strong page-1 positions for competitive keywords typically take 90–120 days.`,
+    },
+    {
+      question: `Do you offer local SEO services specifically for ${cityName} businesses?`,
+      answer: `Yes. We provide specialist local SEO, Google Business Profile optimisation, and digital marketing tailored to the ${cityName} market. We understand local competition and search behaviour in your area.`,
+    },
+    {
+      question: `How much does local digital marketing in ${cityName} cost?`,
+      answer: `Plans start from £199/month with no long-term contracts. Most ${cityName} businesses invest £349/month for full local SEO, Google Ads management, and reputation management.`,
+    },
+  ]);
 
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, breadcrumbSchema, webPageSchema, ratingSchema, faqSchema]) }}
       />
       {/* Hero */}
       <section

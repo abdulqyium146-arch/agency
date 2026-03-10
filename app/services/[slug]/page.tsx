@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, servicesSlugs } from "@/lib/data";
-import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schemas";
+import { generateServiceSchema, generateBreadcrumbSchema, generateWebPageSchema, generateAggregateRatingSchema, generateProfessionalServiceSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
@@ -52,19 +52,29 @@ export default async function ServicePage({
   const service = services[slug];
   if (!service) notFound();
 
-  // Generate schemas for AI understanding
+  const pageUrl = `${BASE_URL}/services/${slug}`;
+
   const serviceSchema = generateServiceSchema(service.title, service.description, service.price);
+  const professionalServiceSchema = generateProfessionalServiceSchema(
+    service.title,
+    service.description,
+    pageUrl,
+    service.price,
+    service.title
+  );
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: BASE_URL },
     { name: "Services", url: `${BASE_URL}/services` },
     { name: service.title },
   ]);
+  const webPageSchema = generateWebPageSchema(service.title, service.tagline, pageUrl);
+  const ratingSchema = generateAggregateRatingSchema(service.title, 4.9, 150);
 
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, professionalServiceSchema, breadcrumbSchema, webPageSchema, ratingSchema]) }}
       />
       {/* Hero */}
       <section

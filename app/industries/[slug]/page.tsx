@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { industries, industriesSlugs, pricingPlans, getSingularName } from "@/lib/data";
-import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schemas";
+import { generateServiceSchema, generateBreadcrumbSchema, generateWebPageSchema, generateAggregateRatingSchema, generateFAQSchema, generateProfessionalServiceSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const WA_LINK =
@@ -56,23 +56,53 @@ export default async function IndustryPage({
 
   const singularName = getSingularName(industry.name);
 
-  // Generate schemas for AI understanding
-  const serviceSchema = generateServiceSchema(
-    `Digital Marketing for ${industry.name}`,
-    `Expert local digital marketing for UK ${industry.plural}. Get more customers searching '${industry.searchTerm}'.`,
-    "£199"
+  const pageUrl = `${BASE_URL}/industries/${slug}`;
+  const serviceTitle = `Local SEO & Digital Marketing for ${industry.name}`;
+  const serviceDescription = `Expert local digital marketing for UK ${industry.plural}. Get more customers searching '${industry.searchTerm}'. Page 1 results in 30–90 days.`;
+
+  const serviceSchema = generateServiceSchema(serviceTitle, serviceDescription, "£199");
+  const professionalServiceSchema = generateProfessionalServiceSchema(
+    serviceTitle,
+    serviceDescription,
+    pageUrl,
+    "From £199/month",
+    `${industry.name} Digital Marketing`
   );
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: BASE_URL },
     { name: "Industries", url: `${BASE_URL}/industries` },
     { name: industry.name },
   ]);
+  const webPageSchema = generateWebPageSchema(serviceTitle, serviceDescription, pageUrl);
+  const ratingSchema = generateAggregateRatingSchema(serviceTitle, 4.9, 150);
+  const faqSchema = generateFAQSchema([
+    {
+      question: `How can local SEO help my ${singularName.toLowerCase()} business?`,
+      answer: `Local SEO gets your ${singularName.toLowerCase()} business ranking at the top of Google when local customers search '${industry.searchTerm}'. More visibility means more calls, bookings, and revenue — typically within 30–90 days.`,
+    },
+    {
+      question: `How long does it take to rank my ${singularName.toLowerCase()} business on Google?`,
+      answer: `Most ${industry.plural} see ranking movement within 30–60 days. Strong page-1 positions typically take 90–120 days depending on local competition.`,
+    },
+    {
+      question: `How much does digital marketing for ${industry.plural} cost?`,
+      answer: `Our plans start from £199/month (Starter) through to £599/month (Pro). Most ${industry.plural} invest £349/month for full local SEO and reputation management.`,
+    },
+    {
+      question: `Do you work with small and independent ${industry.plural}?`,
+      answer: `Yes. We specialise in helping independent ${industry.plural} compete with larger businesses. Local SEO levels the playing field and we've done it for 150+ UK businesses.`,
+    },
+    {
+      question: `Can you rank my ${singularName.toLowerCase()} on Google Maps?`,
+      answer: `Absolutely. Google Maps (3-pack) rankings are our core strength. We optimise your Google Business Profile, build local citations, and manage reviews to push you into the top 3 positions.`,
+    },
+  ]);
 
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, professionalServiceSchema, breadcrumbSchema, webPageSchema, ratingSchema, faqSchema]) }}
       />
       {/* Hero */}
       <section

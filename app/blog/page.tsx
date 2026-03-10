@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generateWebPageSchema, generateBreadcrumbSchema, generateItemListSchema, generateBlogPostingSchema } from "@/lib/schemas";
+
+const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
 export const metadata: Metadata = {
   title: "UK Local Digital Marketing Blog | Tips for Service Businesses",
   description:
     "Expert local SEO tips, Google Ads advice, and digital marketing insights for UK service businesses. Free guides updated monthly.",
+  alternates: {
+    canonical: `${BASE_URL}/blog`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  },
 };
 
 const WA_LINK =
@@ -80,8 +91,43 @@ const posts = [
 ];
 
 export default function BlogPage() {
+  const blogUrl = `${BASE_URL}/blog`;
+
+  const webPageSchema = generateWebPageSchema(
+    "UK Local Digital Marketing Blog | Tips for Service Businesses",
+    "Expert local SEO tips, Google Ads advice, and digital marketing insights for UK service businesses. Free guides updated monthly.",
+    blogUrl
+  );
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: BASE_URL },
+    { name: "Blog" },
+  ]);
+  const itemListSchema = generateItemListSchema(
+    posts.map((post, i) => ({
+      position: i + 1,
+      name: post.title,
+      url: `${blogUrl}#post-${post.id}`,
+      description: post.excerpt,
+    }))
+  );
+  const blogPostingSchemas = posts.map((post) =>
+    generateBlogPostingSchema(
+      post.title,
+      post.excerpt,
+      `${blogUrl}#post-${post.id}`,
+      post.date,
+      post.category
+    )
+  );
+
+  const jsonLd = [webPageSchema, breadcrumbSchema, itemListSchema, ...blogPostingSchemas];
+
   return (
     <div style={{ backgroundColor: "#080D1A" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section
         style={{

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateOrganizationSchema, generateAggregateRatingSchema, generateWebPageSchema } from "@/lib/schemas";
+import { generateOrganizationSchema, generateAggregateRatingSchema, generateWebPageSchema, generateWebSiteSchema } from "@/lib/schemas";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -60,7 +60,9 @@ const webPageSchema = generateWebPageSchema(
   BASE_URL
 );
 
-const jsonLd = [organizationSchema, ratingSchema, webPageSchema];
+const webSiteSchema = generateWebSiteSchema();
+
+const jsonLd = [organizationSchema, webSiteSchema, ratingSchema, webPageSchema];
 
 export default function HomePage() {
   return (
