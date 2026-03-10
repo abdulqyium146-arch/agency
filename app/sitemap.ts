@@ -65,6 +65,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // Automotive SEO landing pages — one per city (high priority local SEO pages)
+  const automotiveSEOPages: MetadataRoute.Sitemap = cities.map((city) => ({
+    url: `${BASE_URL}/locations/${city}/automotive-seo`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  }));
+
   // Industry pages
   const industryPages: MetadataRoute.Sitemap = industries.map((slug) => ({
     url: `${BASE_URL}/industries/${slug}`,
@@ -77,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...servicePages,
     ...locationPages,
+    ...automotiveSEOPages,
     ...industryPages,
   ];
 }

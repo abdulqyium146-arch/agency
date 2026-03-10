@@ -146,6 +146,7 @@ export const servicesSlugs = Object.keys(services);
 // ============================================================================
 
 export const cities = [
+  "london",
   "birmingham",
   "manchester",
   "leeds",
@@ -187,6 +188,36 @@ export const locationTestimonials: Record<string, Testimonial> = {
     name: "James R.",
     business: "Electrician, Leeds",
   },
+  london: {
+    quote:
+      "We went from page 3 to Google Maps top position for 'car mechanic London' within 90 days. Calls and bookings tripled. Best investment ever.",
+    name: "Raj P.",
+    business: "Auto Repair Shop, London",
+  },
+  manchester_auto: {
+    quote:
+      "As a car dealership, local visibility is everything. We're now ranking #1 for 'used car dealership Manchester' and footfall has increased significantly.",
+    name: "David K.",
+    business: "Used Car Dealership, Manchester",
+  },
+  birmingham_auto: {
+    quote:
+      "Local SEO for our MOT centre was a game-changer. We went from 15 MOTs a month to 45+. Finally getting the local visibility we deserved.",
+    name: "Michael B.",
+    business: "MOT Testing Centre, Birmingham",
+  },
+  coventry_auto: {
+    quote:
+      "Competing in Coventry's automotive market is tough, but ranking for 'tyre shop near me' put us on the map. Revenue increased 40% in first quarter.",
+    name: "Sophie L.",
+    business: "Tyre Shop, Coventry",
+  },
+  bristol_auto: {
+    quote:
+      "Car detailing is competitive here, but we went from unranked to position 2 for 'mobile car detailing Bristol'. Bookings are now consistent.",
+    name: "Tom W.",
+    business: "Mobile Car Detailing, Bristol",
+  },
 };
 
 export const defaultLocationTestimonial: Testimonial = {
@@ -201,6 +232,7 @@ export const defaultLocationTestimonial: Testimonial = {
 // ============================================================================
 
 export const industries: Record<string, IndustryData> = {
+  automotive: { name: "Automotive Businesses", icon: "🚗", plural: "Automotive Service Providers", searchTerm: "car repair near me" },
   plumbers: { name: "Plumbers", icon: "🔧", plural: "Plumbing Businesses", searchTerm: "plumber near me" },
   electricians: { name: "Electricians", icon: "⚡", plural: "Electrical Businesses", searchTerm: "electrician near me" },
   dentists: { name: "Dentists", icon: "🦷", plural: "Dental Practices", searchTerm: "dentist near me" },
