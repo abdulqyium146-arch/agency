@@ -4,9 +4,9 @@ const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
 const helpfulLinks = [
-  { label: "Services", href: "/#services", icon: "🚀" },
-  { label: "Pricing", href: "/#pricing", icon: "💰" },
-  { label: "Industries", href: "/#industries", icon: "🏢" },
+  { label: "Services", href: "/services", icon: "🚀" },
+  { label: "Pricing", href: "/pricing", icon: "💰" },
+  { label: "Industries", href: "/industries", icon: "🏢" },
   { label: "Contact", href: "/contact", icon: "💬" },
 ];
 

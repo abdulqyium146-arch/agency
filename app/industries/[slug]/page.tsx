@@ -303,7 +303,7 @@ export default async function IndustryPage({
                   ))}
                 </ul>
                 <Link
-                  href="/#pricing"
+                  href="/pricing"
                   className="w-full flex justify-center py-3 rounded-xl font-semibold text-sm transition-all hover:-translate-y-0.5"
                   style={{
                     backgroundColor: plan.badge ? "rgba(34,197,94,0.15)" : "rgba(79,142,247,0.10)",
