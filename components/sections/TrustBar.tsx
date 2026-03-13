@@ -1,5 +1,5 @@
 const items = [
-  { icon: "🏆", value: "20 Years", label: "Experience" },
+  { icon: "🏆", value: "5 Years", label: "Experience" },
   { icon: "👥", value: "150+", label: "Businesses Helped" },
   { icon: "⭐", value: "4.9/5", label: "Google Rating" },
   { icon: "💰", value: "£2.3M+", label: "Revenue Generated" },

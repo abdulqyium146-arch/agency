@@ -343,7 +343,7 @@ export default async function AutomotiveSEOPage({
                 border: "1px solid rgba(79,142,247,0.3)",
               }}
             >
-              🏆 Ranked 150+ automotive businesses since 2004
+              🏆 Helping 150+ automotive businesses with 5 years of expertise
             </div>
 
             <h1
@@ -387,7 +387,7 @@ export default async function AutomotiveSEOPage({
               { icon: "🚗", label: "Automotive Businesses Ranked", value: "150+" },
               { icon: "📍", label: `${cityName} Market Position`, value: "Specialist" },
               { icon: "💰", label: "Client Revenue Generated", value: "£500k+" },
-              { icon: "🏆", label: "Years in Automotive SEO", value: "20+" },
+              { icon: "🏆", label: "Years in Automotive SEO", value: "5" },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -864,7 +864,7 @@ export default async function AutomotiveSEOPage({
                 className="text-5xl font-extrabold mb-2"
                 style={{ fontFamily: "var(--font-display, sans-serif)", color: "#4F8EF7" }}
               >
-                20+
+                5
               </div>
               <div className="font-semibold mb-6" style={{ color: "#E2E8F0" }}>
                 Years of Local SEO Experience

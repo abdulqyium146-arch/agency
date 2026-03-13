@@ -50,7 +50,7 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5" aria-label="SBMP — Home">
               <Image
-                src="/sbmp-logo.svg"
+                src="/sbmp-logo.png"
                 alt="SBMP Logo"
                 width={36}
                 height={36}
@@ -129,7 +129,7 @@ export default function Header() {
               style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
             >
               <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-                <Image src="/sbmp-logo.svg" alt="SBMP Logo" width={30} height={30} />
+                <Image src="/sbmp-logo.png" alt="SBMP Logo" width={30} height={30} />
                 <span
                   className="text-xl font-extrabold text-white"
                   style={{ fontFamily: "var(--font-display, sans-serif)" }}

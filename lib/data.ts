@@ -50,7 +50,7 @@ export const services: Record<string, ServiceData> = {
     tagline:
       "Get your business to page 1 of Google when local customers search for your services.",
     description:
-      "Local SEO is the single most powerful long-term strategy for UK service businesses. When someone in your area searches for 'plumber near me' or 'best dentist in Manchester', you want to be at the top. I use proven local SEO methods developed over 20 years to get you there — and keep you there.",
+      "Local SEO is the single most powerful long-term strategy for UK service businesses. When someone in your area searches for 'plumber near me' or 'best dentist in Manchester', you want to be at the top. I use proven local SEO methods perfected over 5 years of focused results to get you there — and keep you there.",
     benefits: [
       "Google Business Profile full optimisation",
       "Maps 3-pack ranking strategy",
@@ -69,7 +69,7 @@ export const services: Record<string, ServiceData> = {
     tagline:
       "Instant page-1 visibility with ROI-tracked campaigns that bring in ready-to-buy customers.",
     description:
-      "Google Ads done right can deliver immediate results while your SEO builds. Done wrong, it's an expensive lesson. I've managed Google Ads campaigns for UK service businesses since 2004 — I know how to eliminate wasted spend and maximise your return on every pound.",
+      "Google Ads done right can deliver immediate results while your SEO builds. Done wrong, it's an expensive lesson. I've perfected Google Ads management over 5 years of focused expertise — I know how to eliminate wasted spend and maximise your return on every pound.",
     benefits: [
       "Instant page-1 Google visibility",
       "Zero wasted ad spend",

@@ -17,7 +17,7 @@ export function generateServiceMetadata(
   servicePrice: string
 ) {
   const title = `${serviceName} for UK Service Businesses`;
-  const description = `${serviceTagline} Expert UK local digital marketing since 2004. ${servicePrice}.`;
+  const description = `${serviceTagline} Expert UK local digital marketing. ${servicePrice}.`;
 
   return {
     title,

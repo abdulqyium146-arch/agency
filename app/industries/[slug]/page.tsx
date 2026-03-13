@@ -211,14 +211,14 @@ export default async function IndustryPage({
                 Deep {industry.name} Knowledge = Better Results
               </h2>
               <p className="text-base mb-8 leading-relaxed" style={{ color: "#8B9CB8" }}>
-                I&apos;ve worked with {industry.plural} across the UK since 2004. I understand your customer&apos;s search behaviour, your local competition, and exactly what it takes to win the top Google ranking in your area.
+                I&apos;ve worked with {industry.plural} across the UK for 5 years of focused expertise. I understand your customer&apos;s search behaviour, your local competition, and exactly what it takes to win the top Google ranking in your area.
               </p>
               <ul className="space-y-4">
                 {[
                   `I know the exact search terms ${industry.plural} need to rank for`,
                   `I understand the seasonal demand patterns in your industry`,
                   `I know what your competitors are doing — and how to beat them`,
-                  `I've refined strategies specifically for ${industry.plural} over 20 years`,
+                  `I've refined strategies specifically for ${industry.plural} over 5 years of focused results`,
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <span
@@ -245,7 +245,7 @@ export default async function IndustryPage({
                   className="text-4xl font-extrabold mb-1"
                   style={{ fontFamily: "var(--font-display, sans-serif)", color: "#4F8EF7", textShadow: "0 0 30px rgba(79,142,247,0.5)" }}
                 >
-                  20+ Years
+                  5 Years
                 </div>
                 <div style={{ color: "#8B9CB8" }}>Marketing {industry.plural} across the UK</div>
               </div>

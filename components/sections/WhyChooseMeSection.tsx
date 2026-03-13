@@ -1,6 +1,6 @@
 const points = [
   "You talk directly to ME — not a junior account manager",
-  "I've ranked businesses in 20+ UK cities since 2004",
+  "I've helped businesses rank in 20+ UK cities with 5 years of expertise",
   "Affordable pricing — from just £199/month",
   "I work with YOUR industry — I know what gets results",
 ];

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: "Local Digital Marketing for UK Service Businesses | SBMP",
   },
   description:
-    "Expert local SEO & digital marketing for UK service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ UK businesses since 2004. From £199/month. No contracts.",
+    "Expert local SEO & digital marketing for UK service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ UK businesses. From £199/month. No contracts.",
   keywords: [
     "local SEO UK",
     "local digital marketing",

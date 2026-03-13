@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     q: "What makes you different from an SEO agency?",
-    a: "You work directly with me — a senior expert with 20 years experience. No junior staff, no account managers, no outsourcing. Just direct, expert work on your business.",
+    a: "You work directly with me — a digital marketing expert with 5 years of focused results. No junior staff, no account managers, no outsourcing. Just direct, expert work on your business.",
   },
   {
     q: "Do you work with businesses outside your local area?",

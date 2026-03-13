@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   // Image optimization for Core Web Vitals
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [75, 85, 90],
     remotePatterns: [
       {
         protocol: "https",

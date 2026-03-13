@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   return {
     title: `${service.title} for UK Service Businesses`,
-    description: `${service.tagline} Expert UK local digital marketing since 2004. ${service.price}.`,
+    description: `${service.tagline} Expert UK local digital marketing. ${service.price}.`,
     keywords: [
       service.title.toLowerCase(),
       "UK service business",

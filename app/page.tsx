@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { generateOrganizationSchema, generateAggregateRatingSchema, generateWebPageSchema, generateWebSiteSchema } from "@/lib/schemas";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
+import VisualShowcaseSection from "@/components/sections/VisualShowcaseSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import WhyChooseMeSection from "@/components/sections/WhyChooseMeSection";
 import StatsSection from "@/components/sections/StatsSection";
@@ -73,6 +74,7 @@ export default function HomePage() {
       />
       <HeroSection />
       <TrustBar />
+      <VisualShowcaseSection />
       <ServicesSection />
       <WhyChooseMeSection />
       <StatsSection />

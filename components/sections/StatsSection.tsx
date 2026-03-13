@@ -6,7 +6,7 @@ const stats = [
   { value: "247", suffix: "%", label: "Average Traffic Increase" },
   { value: "150", suffix: "+", label: "UK Businesses Helped" },
   { value: "£2.3M", suffix: "", label: "Client Revenue Generated" },
-  { value: "20", suffix: "+", label: "Years of Expertise" },
+  { value: "5", suffix: "", label: "Years of Expertise" },
   { value: "4.9", suffix: "★", label: "Average Client Rating" },
   { value: "97", suffix: "%", label: "Client Retention Rate" },
 ];

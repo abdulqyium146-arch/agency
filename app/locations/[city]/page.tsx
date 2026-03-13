@@ -117,7 +117,7 @@ export default async function CityPage({
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white mb-6"
               style={{ backgroundColor: "rgba(79,142,247,0.15)", border: "1px solid rgba(79,142,247,0.3)" }}
             >
-              🏆 Ranked {cityName} businesses since 2004
+              🏆 Helping {cityName} businesses rank with 5 years of expertise
             </div>
 
             <h1
@@ -128,7 +128,7 @@ export default async function CityPage({
             </h1>
 
             <p className="text-lg sm:text-xl mb-10" style={{ color: "#8B9CB8" }}>
-              Get your {cityName} service business ranking #1 on Google. I&apos;ve ranked businesses across {cityName} since 2004 — generating real calls, real enquiries, real revenue.
+              Get your {cityName} service business ranking #1 on Google. I've helped businesses across {cityName} with 5 years of focused expertise — generating real calls, real enquiries, real revenue.
             </p>
 
             <div className="flex flex-wrap gap-4">
