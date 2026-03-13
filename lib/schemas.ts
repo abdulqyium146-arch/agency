@@ -5,6 +5,14 @@ const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const BUSINESS_NAME = "SBMP — Small Business Marketing Professional";
 const BUSINESS_PHONE = "+44 (0)1234 567890"; // Update with actual phone
 const BUSINESS_EMAIL = "hello@sbmp.com"; // Update with actual email
+const BUSINESS_PHONE_WA = "+923474825228"; // WhatsApp contact
+const BUSINESS_ADDRESS = {
+  streetAddress: "123 Business Street",
+  addressLocality: "London",
+  addressRegion: "Greater London",
+  postalCode: "SW1A 1AA",
+  addressCountry: "GB",
+};
 
 // ============================================================================
 // ORGANIZATION SCHEMA
@@ -529,6 +537,223 @@ export function generateBlogPostingSchema(
       url: `${BASE_URL}/sbmp-logo.png`,
       width: 1200,
       height: 630,
+    },
+  };
+}
+
+// ============================================================================
+// PERSON SCHEMA (Business Owner/Founder)
+// ============================================================================
+
+export function generatePersonSchema(
+  name: string = "Business Owner",
+  title: string = "Founder & CEO",
+  imageUrl?: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name,
+    jobTitle: title,
+    ...(imageUrl && { image: imageUrl }),
+    url: BASE_URL,
+    sameAs: [],
+    workLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        ...BUSINESS_ADDRESS,
+      },
+    },
+  };
+}
+
+// ============================================================================
+// BUSINESS SCHEMA WITH FULL LOCAL BUSINESS DETAILS
+// ============================================================================
+
+export function generateComprehensiveLocalBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": BASE_URL,
+    name: BUSINESS_NAME,
+    description:
+      "Expert local SEO & digital marketing for UK service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ UK businesses.",
+    url: BASE_URL,
+    telephone: BUSINESS_PHONE,
+    email: BUSINESS_EMAIL,
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 51.5074,
+      longitude: -0.1278,
+    },
+    image: [
+      {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-logo.png`,
+        width: 400,
+        height: 60,
+      },
+      {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-services-hero.jpg`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+    logo: {
+      "@type": "ImageObject",
+      url: `${BASE_URL}/sbmp-logo.png`,
+      width: 400,
+      height: 60,
+    },
+    sameAs: [
+      // Add actual social media URLs when available
+      // "https://www.facebook.com/sbmp",
+      // "https://www.linkedin.com/company/sbmp",
+      // "https://www.twitter.com/sbmp",
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: 4.9,
+      reviewCount: 150,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    priceRange: "£199–£699",
+    areaServed: [
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Region", name: "England" },
+      { "@type": "Region", name: "Scotland" },
+      { "@type": "Region", name: "Wales" },
+      { "@type": "Region", name: "Northern Ireland" },
+    ],
+    knowsAbout: [
+      "Local SEO",
+      "Digital Marketing",
+      "Google Business Profile",
+      "Google Ads",
+      "Web Design",
+      "Search Engine Optimization",
+      "Local Search Marketing",
+    ],
+    opens: "09:00",
+    closes: "18:00",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday", "Sunday"],
+        opens: "10:00",
+        closes: "16:00",
+      },
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "Customer Service",
+        telephone: BUSINESS_PHONE,
+        email: BUSINESS_EMAIL,
+        areaServed: "GB",
+        availableLanguage: ["en"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "WhatsApp Support",
+        url: `https://wa.me/${BUSINESS_PHONE_WA.replace(/\D/g, "")}`,
+        areaServed: "GB",
+        availableLanguage: ["en"],
+      },
+    ],
+    founder: {
+      "@type": "Person",
+      name: "Business Owner",
+    },
+    parentOrganization: {
+      "@type": "Organization",
+      name: BUSINESS_NAME,
+    },
+  };
+}
+
+// ============================================================================
+// ENHANCED OFFER/PRICING SCHEMA
+// ============================================================================
+
+export function generatePricingSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Digital Marketing Services",
+    description:
+      "Complete digital marketing solutions for UK service businesses: Local SEO, Google Ads, Web Design, and Business Growth Consulting",
+    provider: {
+      "@type": "Organization",
+      "@id": BASE_URL,
+      name: BUSINESS_NAME,
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-logo.png`,
+      },
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Digital Marketing Packages",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          "@id": `${BASE_URL}/pricing#starter`,
+          name: "Starter Plan",
+          description: "Entry-level local SEO package including Google Business Profile optimization and basic local citations",
+          price: "199",
+          priceCurrency: "GBP",
+          priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+          eligibleRegion: "GB",
+          areaServed: { "@type": "Country", name: "United Kingdom" },
+          serviceType: "Local SEO",
+        },
+        {
+          "@type": "Offer",
+          "@id": `${BASE_URL}/pricing#growth`,
+          name: "Growth Plan",
+          description: "Full local SEO + Google Ads management for accelerated customer acquisition and visibility",
+          price: "349",
+          priceCurrency: "GBP",
+          priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+          eligibleRegion: "GB",
+          areaServed: { "@type": "Country", name: "United Kingdom" },
+          serviceType: "Local SEO + Paid Ads",
+        },
+        {
+          "@type": "Offer",
+          "@id": `${BASE_URL}/pricing#pro`,
+          name: "Pro Plan",
+          description: "Comprehensive digital marketing: Local SEO, Google Ads, Professional Website, Social Media, and Business Consulting",
+          price: "599",
+          priceCurrency: "GBP",
+          priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
+          availability: "https://schema.org/InStock",
+          url: `${BASE_URL}/pricing`,
+          eligibleRegion: "GB",
+          areaServed: { "@type": "Country", name: "United Kingdom" },
+          serviceType: "Complete Digital Marketing",
+        },
+      ],
     },
   };
 }
