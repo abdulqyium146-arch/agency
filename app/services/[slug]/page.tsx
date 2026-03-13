@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { services, servicesSlugs } from "@/lib/data";
+import { services, servicesSlugs, industriesSlugs } from "@/lib/data";
 import { generateServiceSchema, generateBreadcrumbSchema, generateWebPageSchema, generateAggregateRatingSchema, generateProfessionalServiceSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
@@ -252,6 +252,68 @@ export default async function ServicePage({
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Industries Section - Internal Linking */}
+      <section
+        className="py-16 md:py-24"
+        style={{
+          backgroundColor: "#0D1627",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-12 text-center"
+            style={{ fontFamily: "var(--font-display, sans-serif)", color: "#E2E8F0" }}
+          >
+            Industries We Serve
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industriesSlugs.slice(0, 10).map((industrySlug) => (
+              <Link
+                key={industrySlug}
+                href={`/industries/${industrySlug}`}
+                className="p-4 rounded-lg transition-all hover:bg-white/10"
+                style={{
+                  backgroundColor: "rgba(79,142,247,0.08)",
+                  border: "1px solid rgba(79,142,247,0.20)",
+                }}
+              >
+                <div className="text-center">
+                  <div className="text-2xl mb-2">
+                    {industrySlug === "plumbers"
+                      ? "🔧"
+                      : industrySlug === "dentists"
+                      ? "🦷"
+                      : industrySlug === "electricians"
+                      ? "⚡"
+                      : industrySlug === "solicitors"
+                      ? "⚖️"
+                      : industrySlug === "estate-agents"
+                      ? "🏠"
+                      : industrySlug === "cleaners"
+                      ? "🧹"
+                      : industrySlug === "builders"
+                      ? "🏗️"
+                      : industrySlug === "accountants"
+                      ? "💼"
+                      : "📍"}
+                  </div>
+                  <div
+                    className="text-sm font-semibold"
+                    style={{ color: "#E2E8F0" }}
+                  >
+                    {industrySlug
+                      .split("-")
+                      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                      .join(" ")}
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

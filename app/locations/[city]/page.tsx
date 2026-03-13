@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cities, getLocationTestimonial, getIndustryPluralDisplayList, capitalize } from "@/lib/data";
+import { cities, getLocationTestimonial, getIndustryPluralDisplayList, capitalize, servicesSlugs } from "@/lib/data";
 import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateWebPageSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
@@ -303,6 +303,65 @@ export default async function CityPage({
                 {testimonial.business}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services in This Location - Internal Linking */}
+      <section
+        className="py-16 md:py-24"
+        style={{
+          backgroundColor: "#0D1627",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-12 text-center"
+            style={{ fontFamily: "var(--font-display, sans-serif)", color: "#E2E8F0" }}
+          >
+            Services for {cityName} Businesses
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {servicesSlugs.map((serviceSlug) => {
+              const serviceIcons: Record<string, string> = {
+                "local-seo": "📍",
+                "google-ads": "🎯",
+                "web-design": "💻",
+                "social-media": "📱",
+                reputation: "⭐",
+              };
+              return (
+                <Link
+                  key={serviceSlug}
+                  href={`/services/${serviceSlug}`}
+                  className="p-6 rounded-xl transition-all hover:border-blue-400 hover:bg-blue/5"
+                  style={{
+                    backgroundColor: "rgba(79,142,247,0.08)",
+                    border: "1px solid rgba(79,142,247,0.20)",
+                  }}
+                >
+                  <div className="text-3xl mb-3">
+                    {serviceIcons[serviceSlug] || "🚀"}
+                  </div>
+                  <div
+                    className="font-semibold text-sm"
+                    style={{ color: "#E2E8F0" }}
+                  >
+                    {serviceSlug
+                      .split("-")
+                      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                      .join(" ")}
+                  </div>
+                  <div
+                    className="text-xs mt-2"
+                    style={{ color: "#8B9CB8" }}
+                  >
+                    for {cityName}
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
