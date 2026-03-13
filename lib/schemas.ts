@@ -759,6 +759,27 @@ export function generatePricingSchema() {
 }
 
 // ============================================================================
+// FAQPAGE SCHEMA (For Rich Snippets — Critical for Rankings)
+// ============================================================================
+
+export function generateFAQPageSchema(
+  faqs: Array<{ q: string; a: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+}
+
+// ============================================================================
 // HELPER: Render Schema as JSON
 // ============================================================================
 

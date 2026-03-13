@@ -7,8 +7,8 @@ import {
   generateWebSiteSchema,
   generateComprehensiveLocalBusinessSchema,
   generatePricingSchema,
-  generateBreadcrumbSchema,
   generateContactPointSchema,
+  generateFAQPageSchema,
 } from "@/lib/schemas";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
@@ -67,11 +67,39 @@ export const metadata: Metadata = {
 // These schemas provide:
 // 1. Complete business information (Organization, LocalBusiness)
 // 2. Detailed pricing and service offerings (with rich results)
-// 3. Navigation breadcrumbs (for site structure clarity)
+// 3. FAQ Rich Snippets (critical for CTR and rankings)
 // 4. Aggregate ratings (for social proof)
 // 5. Contact information (for local intent)
 // 6. Website capabilities (sitelinks search box)
 // ============================================================================
+
+// Homepage FAQ data (matches FAQSection component)
+const homepageFAQs = [
+  {
+    q: "How quickly will I see results?",
+    a: "Most clients see measurable improvement in Google rankings within 4–8 weeks. Significant traffic and lead increases typically happen by month 3. I'll be transparent with you throughout.",
+  },
+  {
+    q: "Do I need to sign a long contract?",
+    a: "Never. All plans are month-to-month. I earn your loyalty with results, not contracts. Cancel anytime with 30 days notice.",
+  },
+  {
+    q: "What makes you different from an SEO agency?",
+    a: "You work directly with me — a digital marketing expert with 5 years of focused results. No junior staff, no account managers, no outsourcing. Just direct, expert work on your business.",
+  },
+  {
+    q: "Do you work with businesses outside your local area?",
+    a: "Yes — I work with service businesses all across the UK remotely. My high-authority domain helps rank businesses in any UK city.",
+  },
+  {
+    q: "What's included in the free audit?",
+    a: "A full review of your Google Business Profile, website SEO health, local rankings, competitor analysis, and a personalised action plan. Worth £299, completely free, no obligation.",
+  },
+  {
+    q: "Can I message you on WhatsApp before signing up?",
+    a: "Absolutely — and I encourage it! WhatsApp me on 03474825228 and I'll give you honest advice about what your business actually needs.",
+  },
+];
 
 const organizationSchema = generateOrganizationSchema();
 const comprehensiveLocalBusinessSchema = generateComprehensiveLocalBusinessSchema();
@@ -83,12 +111,7 @@ const webPageSchema = generateWebPageSchema(
 );
 const webSiteSchema = generateWebSiteSchema();
 const pricingSchema = generatePricingSchema();
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Home", url: BASE_URL },
-  { name: "Services" },
-  { name: "Pricing" },
-  { name: "Contact" },
-]);
+const faqPageSchema = generateFAQPageSchema(homepageFAQs);
 const contactPointSchema = generateContactPointSchema();
 
 // Combine all schemas for maximum AI understanding and rich snippets
@@ -99,8 +122,8 @@ const jsonLd = [
   webSiteSchema, // Website structure + search capability
   webPageSchema, // Current page metadata
   pricingSchema, // Detailed pricing + offers (enables rich results)
+  faqPageSchema, // FAQ rich snippets (CRITICAL for rankings)
   ratingSchema, // Aggregate ratings (social proof)
-  breadcrumbSchema, // Navigation structure
   contactPointSchema, // Contact methods
 ];
 
