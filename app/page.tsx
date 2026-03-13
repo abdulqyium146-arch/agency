@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import {
-  generateOrganizationSchema,
   generateAggregateRatingSchema,
   generateWebPageSchema,
   generateWebSiteSchema,
   generateComprehensiveLocalBusinessSchema,
   generatePricingSchema,
   generateContactPointSchema,
-  generateFAQPageSchema,
 } from "@/lib/schemas";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustBar from "@/components/sections/TrustBar";
@@ -62,18 +60,10 @@ export const metadata: Metadata = {
 };
 
 // ============================================================================
-// COMPREHENSIVE HOMEPAGE SCHEMAS FOR MAXIMUM SEO IMPACT
-// ============================================================================
-// These schemas provide:
-// 1. Complete business information (Organization, LocalBusiness)
-// 2. Detailed pricing and service offerings (with rich results)
-// 3. FAQ Rich Snippets (critical for CTR and rankings)
-// 4. Aggregate ratings (for social proof)
-// 5. Contact information (for local intent)
-// 6. Website capabilities (sitelinks search box)
+// HOMEPAGE SCHEMAS — TECHNICALLY SOUND FOR GOOGLE VALIDATION
 // ============================================================================
 
-// Homepage FAQ data (matches FAQSection component)
+// Homepage FAQ data (matches FAQSection component exactly)
 const homepageFAQs = [
   {
     q: "How quickly will I see results?",
@@ -101,38 +91,59 @@ const homepageFAQs = [
   },
 ];
 
-const organizationSchema = generateOrganizationSchema();
-const comprehensiveLocalBusinessSchema = generateComprehensiveLocalBusinessSchema();
-const ratingSchema = generateAggregateRatingSchema("SBMP — Small Business Marketing Professional", 4.9, 150);
-const webPageSchema = generateWebPageSchema(
-  "UK Local Digital Marketing Expert | Get More Customers",
-  "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
-  BASE_URL
-);
-const webSiteSchema = generateWebSiteSchema();
-const pricingSchema = generatePricingSchema();
-const faqPageSchema = generateFAQPageSchema(homepageFAQs);
-const contactPointSchema = generateContactPointSchema();
+// FAQ Schema (separate for Google Rich Snippets validation)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homepageFAQs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
 
-// Combine all schemas for maximum AI understanding and rich snippets
-// Order matters: more specific schemas first, then general
-const jsonLd = [
-  comprehensiveLocalBusinessSchema, // Primary business entity
-  organizationSchema, // Secondary organization details
-  webSiteSchema, // Website structure + search capability
-  webPageSchema, // Current page metadata
-  pricingSchema, // Detailed pricing + offers (enables rich results)
-  faqPageSchema, // FAQ rich snippets (CRITICAL for rankings)
-  ratingSchema, // Aggregate ratings (social proof)
-  contactPointSchema, // Contact methods
+// Business & Website Schemas with @graph wrapper
+const rawSchemas = [
+  generateComprehensiveLocalBusinessSchema(),
+  generateWebSiteSchema(),
+  generateWebPageSchema(
+    "UK Local Digital Marketing Expert | Get More Customers",
+    "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
+    BASE_URL
+  ),
+  generatePricingSchema(),
+  generateAggregateRatingSchema("SBMP — Small Business Marketing Professional", 4.9, 150),
+  generateContactPointSchema(),
 ];
+
+// Remove @context from each schema when using @graph (single @context at top level)
+const businessSchemas = {
+  "@context": "https://schema.org",
+  "@graph": rawSchemas.map((schema: any) => {
+    const { "@context": _context, ...rest } = schema;
+    return rest;
+  }),
+};
 
 export default function HomePage() {
   return (
     <>
+      {/* FAQ Schema - separate for rich snippet validation */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.length > 1 ? jsonLd : jsonLd[0]) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+      {/* Business & Website Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(businessSchemas),
+        }}
       />
       <HeroSection />
       <TrustBar />
