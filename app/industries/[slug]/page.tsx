@@ -349,6 +349,22 @@ export default async function IndustryPage({
         </div>
       </section>
 
+      {/* Digital Marketing Overview Link */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#0D1627" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm mb-3" style={{ color: "#8B9CB8" }}>
+            Interested in a comprehensive digital marketing strategy?
+          </p>
+          <Link
+            href="/digital-marketing-for-small-business"
+            className="inline-block text-lg font-semibold transition-colors hover:underline"
+            style={{ color: "#4F8EF7" }}
+          >
+            View Our Complete Digital Marketing Approach →
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section
         className="py-16 md:py-24"

@@ -318,6 +318,25 @@ export default async function ServicePage({
         </div>
       </section>
 
+      {/* Digital Marketing Overview Link */}
+      <section
+        className="py-12 md:py-16"
+        style={{ backgroundColor: "#0D1627" }}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm mb-3" style={{ color: "#8B9CB8" }}>
+            Combine multiple strategies for maximum results
+          </p>
+          <Link
+            href="/digital-marketing-for-small-business"
+            className="inline-block text-lg font-semibold transition-colors hover:underline"
+            style={{ color: "#4F8EF7" }}
+          >
+            See Our Complete Digital Marketing Approach →
+          </Link>
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section
         className="py-16 md:py-24"

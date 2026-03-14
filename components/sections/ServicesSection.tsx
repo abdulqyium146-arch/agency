@@ -114,6 +114,26 @@ export default function ServicesSection() {
             </div>
           ))}
         </div>
+
+        {/* Bottom CTA - Link to Digital Marketing Overview */}
+        <div
+          className="mt-12 p-6 rounded-xl text-center"
+          style={{
+            backgroundColor: "rgba(79, 142, 247, 0.08)",
+            border: "1px solid rgba(79, 142, 247, 0.2)",
+          }}
+        >
+          <p className="text-sm" style={{ color: "#8B9CB8" }}>
+            Want to understand how these services work together?
+          </p>
+          <Link
+            href="/digital-marketing-for-small-business"
+            className="inline-block text-base font-semibold mt-2 transition-colors hover:underline"
+            style={{ color: "#4F8EF7" }}
+          >
+            Explore Our Digital Marketing Approach →
+          </Link>
+        </div>
       </div>
     </section>
   );

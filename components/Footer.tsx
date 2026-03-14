@@ -177,6 +177,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/digital-marketing-for-small-business"
+                  className="text-sm transition-colors hover:text-white"
+                  style={{ color: "#8B9CB8" }}
+                >
+                  Digital Marketing
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/free-audit"
                   className="text-sm transition-colors hover:text-white"
                   style={{ color: "#8B9CB8" }}
