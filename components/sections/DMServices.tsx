@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const services = [
   {
@@ -238,24 +239,42 @@ export default function DMServices() {
           >
             Get a free audit. We'll analyze your business, identify opportunities, and recommend the right digital marketing strategy for your specific goals.
           </p>
-          <a
-            href="/free-audit"
-            className="inline-block px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg"
-            style={{
-              backgroundColor: "#4F8EF7",
-              color: "#FFF",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#3B82F6";
-              e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#4F8EF7";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Get Your Free Audit
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="/free-audit"
+              className="inline-block px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg"
+              style={{
+                backgroundColor: "#4F8EF7",
+                color: "#FFF",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#3B82F6";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#4F8EF7";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Get Your Free Audit
+            </a>
+            <Link
+              href="/services"
+              className="inline-block px-8 py-3 rounded-lg font-semibold transition-all duration-200 border-2"
+              style={{
+                borderColor: "#4F8EF7",
+                color: "#4F8EF7",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(79, 142, 247, 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              View All Services
+            </Link>
+          </div>
         </div>
       </div>
     </section>

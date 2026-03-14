@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function DMBenefits() {
   return (
     <section style={{ backgroundColor: "#0D1627" }} className="py-12 md:py-16">
@@ -73,6 +75,8 @@ export default function DMBenefits() {
                 solution: "Local SEO optimization + Google Ads management",
                 result: "420% increase in qualified leads, £45k new revenue in 6 months",
                 metric: "420% ↑ Leads",
+                industryLink: "/industries/auto-locksmiths",
+                industryName: "Auto Locksmiths",
               },
               {
                 title: "Car Detailing Service",
@@ -80,6 +84,8 @@ export default function DMBenefits() {
                 solution: "Local SEO, Google Business Profile, social media",
                 result: "Ranked #1 on Google, booked 60+ customers, 8-week waitlist",
                 metric: "60+ New Customers",
+                industryLink: "/industries/car-detailing",
+                industryName: "Car Detailing",
               },
               {
                 title: "Cleaning Specialist",
@@ -87,6 +93,8 @@ export default function DMBenefits() {
                 solution: "Website redesign + Ads optimization + reviews management",
                 result: "50% lower cost per customer, 180% more bookings",
                 metric: "50% Lower CPC",
+                industryLink: "/industries/cleaners",
+                industryName: "Cleaning Services",
               },
               {
                 title: "Pressure Washing LLC (USA)",
@@ -94,6 +102,8 @@ export default function DMBenefits() {
                 solution: "Social media + email marketing + local SEO",
                 result: "Year-round bookings, 300% revenue increase",
                 metric: "300% ↑ Revenue",
+                industryLink: undefined,
+                industryName: undefined,
               },
             ].map((study, idx) => (
               <div
@@ -137,6 +147,17 @@ export default function DMBenefits() {
                       {study.metric}
                     </div>
                     <p style={{ color: "#8B9CB8" }}>{study.result}</p>
+                    {study.industryLink && (
+                      <div className="mt-3 pt-3 border-t border-white/10">
+                        <Link
+                          href={study.industryLink}
+                          className="text-xs font-semibold transition-colors hover:underline"
+                          style={{ color: "#4F8EF7" }}
+                        >
+                          View {study.industryName} Services →
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
