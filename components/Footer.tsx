@@ -297,11 +297,43 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Partners */}
+          <div
+            className="py-6"
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4" style={{ color: "#E2E8F0" }}>
+              Partners
+            </h4>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://anymedia.agency"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm transition-colors hover:text-white"
+                style={{ color: "#8B9CB8" }}
+              >
+                anymedia.agency
+              </a>
+              <a
+                href="https://zwmarketing.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm transition-colors hover:text-white"
+                style={{ color: "#8B9CB8" }}
+              >
+                zwmarketing.uk
+              </a>
+            </div>
+          </div>
+
           {/* Copyright & Legal */}
           <div
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm"
             style={{
-              borderTop: "1px solid rgba(255,255,255,0.08)",
               paddingTop: "1.5rem",
               color: "#4A5A6E",
             }}
