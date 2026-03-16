@@ -32,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.92,
     },
     {
+      url: `${BASE_URL}/local-seo-experts-katy-tx`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.92,
+    },
+    {
       url: `${BASE_URL}/contact`,
       lastModified: now,
       changeFrequency: "monthly",
