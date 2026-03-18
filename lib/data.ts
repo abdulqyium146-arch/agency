@@ -218,6 +218,12 @@ export const locationTestimonials: Record<string, Testimonial> = {
     name: "Tom W.",
     business: "Mobile Car Detailing, Bristol",
   },
+  bristol: {
+    quote:
+      "I was on page 4 and barely getting 5 enquiries a month. Within 90 days we were ranking #2 for 'plumber Bristol' and in the Maps 3-pack for Bedminster. Now I get 30+ leads a month — an extra £4,000–£6,000 in revenue every single month.",
+    name: "Mike L.",
+    business: "Plumbing Business, Bedminster, Bristol",
+  },
 };
 
 export const defaultLocationTestimonial: Testimonial = {

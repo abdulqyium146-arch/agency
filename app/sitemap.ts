@@ -72,11 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Location pages (high priority — these rank locally)
+  // Bristol has a dedicated fully-optimised page — boosted to 0.93
   const locationPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${BASE_URL}/locations/${city}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.8,
+    priority: city === "bristol" ? 0.93 : 0.8,
   }));
 
   // Automotive SEO landing pages — one per city (high priority local SEO pages)
