@@ -38,6 +38,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.92,
     },
     {
+      url: `${BASE_URL}/local-business-marketing`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.93,
+    },
+    {
+      url: `${BASE_URL}/local-advertising`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.93,
+    },
+    {
+      url: `${BASE_URL}/local-marketing-agency`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.94,
+    },
+    {
+      url: `${BASE_URL}/google-maps-marketing`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.92,
+    },
+    {
+      url: `${BASE_URL}/local-social-media-marketing`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.91,
+    },
+    {
+      url: `${BASE_URL}/local-marketing-strategies`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.91,
+    },
+    {
+      url: `${BASE_URL}/free-local-advertising`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.90,
+    },
+    {
       url: `${BASE_URL}/contact`,
       lastModified: now,
       changeFrequency: "monthly",

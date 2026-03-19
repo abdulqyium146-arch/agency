@@ -83,6 +83,14 @@ ${factsLines}
 
 ## Pages Index
 
+${BASE_URL}/ — Homepage: UK local digital marketing expert. Local SEO, Google Ads, web design. Free audit.
+${BASE_URL}/local-business-marketing — Pillar page: Local business marketing strategies, services, and expert guidance for small businesses.
+${BASE_URL}/local-advertising — Pillar page: Local advertising options — Google Ads, free local advertising, Facebook ads, local directories.
+${BASE_URL}/local-marketing-agency — Pillar page: Local marketing agency services, packages, and comparison guide. UK and US coverage.
+${BASE_URL}/google-maps-marketing — Pillar page: Google Maps marketing, Local 3-Pack ranking, GMB optimisation, and local search marketing.
+${BASE_URL}/local-social-media-marketing — Pillar page: Local social media marketing — Facebook, Instagram, local video, and retargeting.
+${BASE_URL}/local-marketing-strategies — Pillar page: Best local marketing strategies for small businesses ranked by ROI.
+${BASE_URL}/free-local-advertising — Pillar page: Free local advertising options — Google Business Profile, directories, Nextdoor, and more.
 ${BASE_URL}/local-seo — Hub page: Complete directory of local SEO services and all 25 US city pages. Start here.
 ${cityPageLines}
 ${servicePageLines}
