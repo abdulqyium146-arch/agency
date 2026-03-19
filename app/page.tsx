@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import {
   generateAggregateRatingSchema,
@@ -158,6 +159,79 @@ export default function HomePage() {
       <TestimonialsSection />
       <ProcessSection />
       <CitiesSection />
+
+      {/* ── LOCAL MARKETING RESOURCES — internal linking hub ── */}
+      <section className="bg-[#0D1627] py-16 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-extrabold text-white text-center mb-3">
+            Local Marketing Resources
+          </h2>
+          <p className="text-[#8B9CB8] text-center mb-10 max-w-2xl mx-auto">
+            Everything you need to attract more local customers — guides, strategies, and expert services for UK small businesses.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                href: "/local-business-marketing",
+                title: "Local Business Marketing",
+                desc: "Complete guide to marketing your local business online — strategies ranked by ROI.",
+              },
+              {
+                href: "/local-advertising",
+                title: "Local Advertising",
+                desc: "Best local advertising options — Google Ads, free directories, Facebook, and more.",
+              },
+              {
+                href: "/local-marketing-agency",
+                title: "Local Marketing Agency",
+                desc: "See how a specialist local marketing agency grows your customer base faster.",
+              },
+              {
+                href: "/google-maps-marketing",
+                title: "Google Maps Marketing",
+                desc: "Rank in Google's Local 3-Pack and capture 44% of local search clicks.",
+              },
+              {
+                href: "/local-social-media-marketing",
+                title: "Social Media Marketing",
+                desc: "Facebook, Instagram and local video marketing that drives footfall and calls.",
+              },
+              {
+                href: "/local-marketing-strategies",
+                title: "Marketing Strategies",
+                desc: "Proven local marketing strategies for service businesses — from £0 to paid.",
+              },
+              {
+                href: "/free-local-advertising",
+                title: "Free Local Advertising",
+                desc: "8 free ways to advertise your business locally — starting with Google Business Profile.",
+              },
+              {
+                href: "/digital-marketing-for-small-business",
+                title: "Digital Marketing",
+                desc: "Full-funnel digital marketing for small business owners who want consistent leads.",
+              },
+              {
+                href: "/local-seo",
+                title: "Local SEO Services (US)",
+                desc: "Local SEO packages for US businesses — all 25 major cities covered.",
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group block bg-[#0F172A] border border-white/7 rounded-2xl p-5 hover:border-[#3B82F6]/40 transition-all duration-200"
+              >
+                <h3 className="font-semibold text-white group-hover:text-[#3B82F6] transition-colors mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#8B9CB8] leading-relaxed">{item.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <FAQSection />
       <FinalCTASection />
     </>

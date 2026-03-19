@@ -57,6 +57,18 @@ const industries = [
   { label: "Automotive", href: "/industries/automotive" },
 ];
 
+const localMarketing = [
+  { label: "Local Business Marketing", href: "/local-business-marketing" },
+  { label: "Local Advertising", href: "/local-advertising" },
+  { label: "Local Marketing Agency", href: "/local-marketing-agency" },
+  { label: "Google Maps Marketing", href: "/google-maps-marketing" },
+  { label: "Social Media Marketing", href: "/local-social-media-marketing" },
+  { label: "Marketing Strategies", href: "/local-marketing-strategies" },
+  { label: "Free Local Advertising", href: "/free-local-advertising" },
+  { label: "Local SEO (US)", href: "/local-seo" },
+  { label: "Digital Marketing", href: "/digital-marketing-for-small-business" },
+];
+
 const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
@@ -70,7 +82,7 @@ export default function Footer() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-8">
           {/* Services */}
           <div>
             <h3 className="font-semibold text-sm uppercase tracking-wider mb-4" style={{ color: "#E2E8F0" }}>
@@ -151,57 +163,50 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources & Links */}
+          {/* Local Marketing — links to all 7 new pillar pages */}
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-wider mb-4" style={{ color: "#E2E8F0" }}>
+              Local Marketing
+            </h3>
+            <ul className="space-y-2">
+              {localMarketing.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-sm transition-colors hover:text-white"
+                    style={{ color: "#8B9CB8" }}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
           <div>
             <h3 className="font-semibold text-sm uppercase tracking-wider mb-4" style={{ color: "#E2E8F0" }}>
               Resources
             </h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "#8B9CB8" }}
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "#8B9CB8" }}
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/digital-marketing-for-small-business"
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "#8B9CB8" }}
-                >
-                  Digital Marketing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/free-audit"
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "#8B9CB8" }}
-                >
-                  Free Audit
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/local-seo"
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "#8B9CB8" }}
-                >
-                  US Local SEO
-                </Link>
-              </li>
+              {[
+                { label: "Free Audit", href: "/free-audit" },
+                { label: "Pricing", href: "/pricing" },
+                { label: "Blog", href: "/blog" },
+                { label: "Services", href: "/services" },
+                { label: "Industries", href: "/industries" },
+                { label: "Locations", href: "/locations" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-sm transition-colors hover:text-white"
+                    style={{ color: "#8B9CB8" }}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

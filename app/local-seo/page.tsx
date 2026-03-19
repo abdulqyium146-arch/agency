@@ -445,6 +445,39 @@ export default function LocalSeoHubPage() {
         </div>
       </section>
 
+      {/* ── RELATED LOCAL MARKETING RESOURCES ────────────────── */}
+      <section className="bg-[#0F172A] py-14">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-display text-2xl font-extrabold text-white mb-2 text-center">
+            Related Local Marketing Guides
+          </h2>
+          <p className="text-[#94A3B8] text-center mb-8 max-w-xl mx-auto">
+            Explore our complete library of local marketing resources to build a stronger local presence.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { href: "/local-business-marketing", title: "Local Business Marketing", desc: "Strategies and tactics that grow local businesses — ROI-ranked guide." },
+              { href: "/google-maps-marketing", title: "Google Maps Marketing", desc: "Dominate the Local 3-Pack with proven GMB optimisation techniques." },
+              { href: "/local-advertising", title: "Local Advertising", desc: "Every local advertising option compared — free and paid channels." },
+              { href: "/local-marketing-agency", title: "Local Marketing Agency", desc: "What a specialist agency does differently — and why it matters." },
+              { href: "/local-social-media-marketing", title: "Social Media Marketing", desc: "Facebook, Instagram and video marketing for local businesses." },
+              { href: "/free-local-advertising", title: "Free Local Advertising", desc: "8 free ways to advertise locally — starting with Google Business Profile." },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group block bg-[#0D1627] border border-white/7 rounded-2xl p-5 hover:border-[#3B82F6]/40 transition-all duration-200"
+              >
+                <h3 className="font-semibold text-white group-hover:text-[#3B82F6] transition-colors mb-1 text-sm">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-[#94A3B8] leading-relaxed">{item.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── BOTTOM CTA ────────────────────────────────────────── */}
       <section className="bg-gradient-to-br from-[#1E3A5F] to-[#0F172A] py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
