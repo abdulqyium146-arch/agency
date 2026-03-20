@@ -80,6 +80,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.90,
     },
     {
+      url: `${BASE_URL}/brighton`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.94,
+    },
+    {
       url: `${BASE_URL}/contact`,
       lastModified: now,
       changeFrequency: "monthly",
