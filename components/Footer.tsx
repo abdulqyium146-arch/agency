@@ -245,6 +245,15 @@ export default function Footer() {
                   💬 WhatsApp
                 </a>
               </li>
+              <li>
+                <a
+                  href="mailto:smallbusinessmarketing844@gmail.com"
+                  className="flex items-center gap-2 text-sm hover:text-white transition-colors"
+                  style={{ color: "#8B9CB8" }}
+                >
+                  ✉️ smallbusinessmarketing844@gmail.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>
