@@ -68,6 +68,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.91,
     },
     {
+      url: `${BASE_URL}/video-editing-services`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.93,
+    },
+    {
       url: `${BASE_URL}/local-marketing-strategies`,
       lastModified: now,
       changeFrequency: "monthly",
