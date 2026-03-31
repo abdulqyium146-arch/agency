@@ -283,8 +283,10 @@ export default function Footer() {
             <div className="flex gap-3">
               {/* Facebook */}
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61583689962796"
                 aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors hover:bg-white/15"
                 style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
               >
@@ -294,8 +296,10 @@ export default function Footer() {
               </a>
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/small_business_marketing_profe/"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors hover:bg-white/15"
                 style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
               >
