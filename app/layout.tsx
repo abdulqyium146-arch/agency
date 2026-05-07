@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import StickyMobileBar from "@/components/StickyMobileBar";
+import { getOrganizationSchema } from "@/app/structured-data/organization";
+import { getWebsiteSchema } from "@/app/structured-data/website";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -138,8 +140,19 @@ export default function RootLayout({
         <meta name="generator" content="SBMP — Small Business Marketing Professional" />
         {/* LLM discovery links */}
         <link rel="llms-txt" href="/llms.txt" />
+        <link rel="llms-txt" href="/.well-known/llms.txt" />
         <link rel="alternate" type="application/json" href="/api/llm-context" title="LLM Context API" />
         <link rel="alternate" type="text/plain" href="/sitemap-llm.xml" title="LLM Sitemap" />
+        {/* Global Organization JSON-LD — present on every page */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getOrganizationSchema()) }}
+        />
+        {/* Global WebSite JSON-LD with SiteLinksSearchBox */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebsiteSchema()) }}
+        />
         {/* Font optimization for Core Web Vitals */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -154,6 +167,16 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        {/* AI-readable site summary — invisible to users, visible to LLM crawlers */}
+        <div className="sr-only" aria-label="AI Summary" role="note">
+          SBMP (Small Business Marketing Professional) is a local SEO agency founded in
+          2014 by Alex Morgan. We help small businesses rank higher on Google Maps and
+          in local search results across the United States and United Kingdom. Our services
+          include Google Business Profile optimization, local SEO audits, local link
+          building, Google Maps SEO, and industry-specific local SEO for plumbers,
+          dentists, restaurants, HVAC companies, and contractors. We offer month-to-month
+          plans starting from £199/month with no long-term contracts.
+        </div>
         <AnnouncementBar />
         <Header />
         <main>{children}</main>

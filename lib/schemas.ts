@@ -3,9 +3,14 @@
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 const BUSINESS_NAME = "SBMP — Small Business Marketing Professional";
-const BUSINESS_PHONE = "+44 (0)1234 567890"; // Update with actual phone
-const BUSINESS_EMAIL = "hello@sbmp.com"; // Update with actual email
-const BUSINESS_PHONE_WA = "+923474825228"; // WhatsApp contact
+const BUSINESS_PHONE = "+44 (0)1234 567890";
+const BUSINESS_EMAIL = "hello@sbmp.com";
+const BUSINESS_PHONE_WA = "+923474825228";
+const FOUNDER_NAME = "Alex Morgan";
+const FOUNDER_TITLE = "Local SEO Expert & Founder";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61583689962796";
+const INSTAGRAM_URL = "https://www.instagram.com/small_business_marketing_profe/";
+const LINKEDIN_URL = "https://www.linkedin.com/";
 const BUSINESS_ADDRESS = {
   streetAddress: "123 Business Street",
   addressLocality: "London",
@@ -46,29 +51,23 @@ export interface OrganizationSchema {
 export function generateOrganizationSchema(): OrganizationSchema {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     name: BUSINESS_NAME,
     url: BASE_URL,
     logo: `${BASE_URL}/sbmp-logo.png`,
     description:
-      "Expert local SEO & digital marketing for UK service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ UK businesses.",
+      "Expert local SEO & digital marketing for UK and US service businesses. Rank on page 1 of Google in 30–90 days. Trusted by 150+ businesses.",
     telephone: BUSINESS_PHONE,
     email: BUSINESS_EMAIL,
-    sameAs: [
-      // Add social media URLs when available
-      // "https://facebook.com/sbmp",
-      // "https://linkedin.com/company/sbmp",
-    ],
+    sameAs: [FACEBOOK_URL, INSTAGRAM_URL, LINKEDIN_URL],
     address: {
       "@type": "PostalAddress",
       addressCountry: "GB",
     },
+    foundingDate: "2014",
     areaServed: [
-      { "@type": "City", name: "Birmingham" },
-      { "@type": "City", name: "Manchester" },
-      { "@type": "City", name: "Leeds" },
-      { "@type": "City", name: "London" },
-      { "@type": "Country", name: "UK" },
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Country", name: "United States" },
     ],
   };
 }
@@ -612,12 +611,7 @@ export function generateComprehensiveLocalBusinessSchema() {
       width: 400,
       height: 60,
     },
-    sameAs: [
-      // Add actual social media URLs when available
-      // "https://www.facebook.com/sbmp",
-      // "https://www.linkedin.com/company/sbmp",
-      // "https://www.twitter.com/sbmp",
-    ],
+    sameAs: [FACEBOOK_URL, INSTAGRAM_URL, LINKEDIN_URL],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: 4.9,
@@ -677,7 +671,8 @@ export function generateComprehensiveLocalBusinessSchema() {
     ],
     founder: {
       "@type": "Person",
-      name: "Business Owner",
+      name: FOUNDER_NAME,
+      jobTitle: FOUNDER_TITLE,
     },
     parentOrganization: {
       "@type": "Organization",
@@ -777,6 +772,130 @@ export function generateFAQPageSchema(
       },
     })),
   };
+}
+
+// ============================================================================
+// SPEAKABLE SCHEMA (voice search + Google Assistant)
+// ============================================================================
+
+export function generateSpeakableSchema(pageUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: pageUrl,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".page-summary", ".faq-section", "h1", "h2"],
+    },
+  };
+}
+
+// ============================================================================
+// HOW-TO SCHEMA (guide pages — triggers rich results)
+// ============================================================================
+
+export function generateHowToSchema(opts: {
+  name: string;
+  description: string;
+  url: string;
+  steps: Array<{ name: string; text: string; url?: string }>;
+  totalTime?: string;
+}) {
+  const { name, description, url, steps, totalTime } = opts;
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    url,
+    ...(totalTime && { totalTime }),
+    step: steps.map((step, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: step.url }),
+    })),
+  };
+}
+
+// ============================================================================
+// ARTICLE SCHEMA (blog posts + editorial pages)
+// ============================================================================
+
+export function generateArticleSchema(opts: {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  imageUrl?: string;
+  section?: string;
+}) {
+  const { headline, description, url, datePublished, dateModified, imageUrl, section = "Digital Marketing" } = opts;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    inLanguage: "en-GB",
+    articleSection: section,
+    author: {
+      "@type": "Person",
+      name: FOUNDER_NAME,
+      jobTitle: FOUNDER_TITLE,
+      url: LINKEDIN_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_NAME,
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/sbmp-logo.png`,
+        width: 400,
+        height: 60,
+      },
+    },
+    image: {
+      "@type": "ImageObject",
+      url: imageUrl ?? `${BASE_URL}/sbmp-logo.png`,
+      width: 1200,
+      height: 630,
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+}
+
+// ============================================================================
+// SITE NAVIGATION ELEMENT SCHEMA
+// ============================================================================
+
+export function generateSiteNavigationSchema() {
+  const navItems = [
+    { name: "Services", url: `${BASE_URL}/services` },
+    { name: "Local SEO", url: `${BASE_URL}/local-seo` },
+    { name: "Locations", url: `${BASE_URL}/locations` },
+    { name: "Industries", url: `${BASE_URL}/industries` },
+    { name: "Pricing", url: `${BASE_URL}/pricing` },
+    { name: "Blog", url: `${BASE_URL}/blog` },
+    { name: "Contact", url: `${BASE_URL}/contact` },
+    { name: "Free Audit", url: `${BASE_URL}/free-audit` },
+  ];
+  return navItems.map((item, i) => ({
+    "@context": "https://schema.org",
+    "@type": "SiteLinksSearchBox",
+    url: BASE_URL,
+    name: item.name,
+    potentialAction: {
+      "@type": "ViewAction",
+      target: item.url,
+    },
+    position: i + 1,
+  }));
 }
 
 // ============================================================================

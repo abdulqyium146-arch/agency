@@ -11,7 +11,7 @@ const industries = industriesSlugs;
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  // Static core pages
+  // ── Static core pages ──────────────────────────────────────────────────────
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
@@ -26,11 +26,73 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/digital-marketing-for-small-business`,
+      url: `${BASE_URL}/pricing`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.92,
+      priority: 0.85,
     },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/digital-marketing`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.88,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+  ];
+
+  // ── Section hub pages ──────────────────────────────────────────────────────
+  const hubPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/services`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.88,
+    },
+    {
+      url: `${BASE_URL}/locations`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/industries`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/local-seo`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+  ];
+
+  // ── Landing pages (US market) ──────────────────────────────────────────────
+  const landingPages: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/local-seo-experts-katy-tx`,
       lastModified: now,
@@ -68,12 +130,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.91,
     },
     {
-      url: `${BASE_URL}/video-editing-services`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.93,
-    },
-    {
       url: `${BASE_URL}/local-marketing-strategies`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -83,8 +139,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/free-local-advertising`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.90,
+      priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/video-editing-services`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.93,
+    },
+  ];
+
+  // ── Brighton location pages (UK flagship) ─────────────────────────────────
+  const brightonPages: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/brighton`,
       lastModified: now,
@@ -92,32 +158,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.94,
     },
     {
-      url: `${BASE_URL}/contact`,
+      url: `${BASE_URL}/brighton/seo/local`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.9,
     },
     {
-      url: `${BASE_URL}/blog`,
+      url: `${BASE_URL}/brighton/seo/ecommerce`,
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
-      url: `${BASE_URL}/privacy`,
+      url: `${BASE_URL}/brighton/content/email`,
       lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
-      url: `${BASE_URL}/terms`,
+      url: `${BASE_URL}/brighton/social/instagram`,
       lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/brighton/social/facebook`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/brighton/web/landing-pages`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/brighton/web/wordpress`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
   ];
 
-  // Service pages
+  // ── Service pages ──────────────────────────────────────────────────────────
   const servicePages: MetadataRoute.Sitemap = services.map((slug) => ({
     url: `${BASE_URL}/services/${slug}`,
     lastModified: now,
@@ -125,8 +209,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  // Location pages (high priority — these rank locally)
-  // Bristol has a dedicated fully-optimised page — boosted to 0.93
+  // ── UK location pages (high priority — local rankings) ────────────────────
   const locationPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${BASE_URL}/locations/${city}`,
     lastModified: now,
@@ -134,7 +217,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: city === "bristol" ? 0.93 : 0.8,
   }));
 
-  // Automotive SEO landing pages — one per city (high priority local SEO pages)
+  // ── Automotive SEO — one per UK city ──────────────────────────────────────
   const automotiveSEOPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${BASE_URL}/locations/${city}/automotive-seo`,
     lastModified: now,
@@ -142,7 +225,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Industry pages
+  // ── Industry pages ────────────────────────────────────────────────────────
   const industryPages: MetadataRoute.Sitemap = industries.map((slug) => ({
     url: `${BASE_URL}/industries/${slug}`,
     lastModified: now,
@@ -150,17 +233,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  // Local SEO hub page
-  const localSeoHub: MetadataRoute.Sitemap = [
-    {
-      url: `${BASE_URL}/local-seo`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    },
-  ];
-
-  // Local SEO city pages — one per major US city
+  // ── Local SEO city pages — 25 US cities ───────────────────────────────────
   const localSeoCityPages: MetadataRoute.Sitemap = locationSlugs.map((slug) => ({
     url: `${BASE_URL}/local-seo/${slug}`,
     lastModified: now,
@@ -168,7 +241,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Local SEO service pages — city × service combinations (25 × 12 = 300 pages)
+  // ── Local SEO service pages — 25 cities × 12 services = 300 pages ─────────
   const localSeoServicePages: MetadataRoute.Sitemap = locationSlugs.flatMap((locSlug) =>
     serviceSlugs.map((svcSlug) => ({
       url: `${BASE_URL}/local-seo/${locSlug}/${svcSlug}`,
@@ -180,11 +253,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticPages,
+    ...hubPages,
+    ...landingPages,
+    ...brightonPages,
     ...servicePages,
     ...locationPages,
     ...automotiveSEOPages,
     ...industryPages,
-    ...localSeoHub,
     ...localSeoCityPages,
     ...localSeoServicePages,
   ];
