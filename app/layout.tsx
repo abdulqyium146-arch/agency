@@ -118,7 +118,7 @@ export const metadata: Metadata = {
     address: false,
   },
   verification: {
-    google: "",   // add Google Search Console verification token when ready
+    google: "d511ba0aff278179",
   },
 };
 
