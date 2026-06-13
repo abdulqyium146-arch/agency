@@ -118,7 +118,7 @@ export const metadata: Metadata = {
     address: false,
   },
   verification: {
-    google: "d511ba0aff278179",
+    google: "WFNVJO5ENxypWGEeimQW8DUO7tN6vJ8xuZ1iMw_Nudk",
   },
 };
 
