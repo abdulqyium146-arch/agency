@@ -163,7 +163,7 @@ export async function getAvailableSlots(date: string) {
     select: { time: true },
   });
 
-  const bookedTimes = new Set(booked.map((b) => b.time));
+  const bookedTimes = new Set(booked.map((b: { time: string }) => b.time));
 
   return slots.map((time) => ({
     time,
