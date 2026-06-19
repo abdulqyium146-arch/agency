@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { loginSchema } from "@/lib/validations";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma as any),
   session: { strategy: "jwt" },
   pages: {
     signIn: "/admin/login",
@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const valid = await bcrypt.compare(parsed.data.password, user.password);
         if (!valid) return null;
 
-        return { id: user.id, email: user.email, name: user.name, role: user.role };
+        return { id: user.id, email: user.email, name: user.name, role: user.role } as any;
       },
     }),
   ],
