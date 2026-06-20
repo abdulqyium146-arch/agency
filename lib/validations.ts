@@ -15,7 +15,7 @@ export type BookingFormData = z.infer<typeof bookingSchema>;
 
 export const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(1),
 });
 
 export const serviceSchema = z.object({
