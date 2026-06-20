@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,8 +21,12 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginData) => {
     setError("");
-    const res = await signIn("credentials", { ...data, redirect: false });
-    if (res?.error) {
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
       setError("Invalid email or password");
       return;
     }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { getSessionFromRequest } from "@/lib/admin-auth";
 
 export async function proxy(req: NextRequest) {
   const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
@@ -7,12 +7,8 @@ export async function proxy(req: NextRequest) {
 
   if (!isAdminRoute) return NextResponse.next();
 
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
-
-  const isAuthenticated = !!token;
+  const session = await getSessionFromRequest(req);
+  const isAuthenticated = !!session;
 
   if (!isLoginRoute && !isAuthenticated) {
     return NextResponse.redirect(new URL("/admin/login", req.url));
