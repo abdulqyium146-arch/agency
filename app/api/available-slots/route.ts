@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from "next/server";
 import { getAvailableSlots } from "@/app/actions/booking";
 import { rateLimit } from "@/lib/rate-limit";
