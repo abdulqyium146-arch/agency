@@ -7,8 +7,8 @@ import { createSessionToken, SESSION_COOKIE } from "@/lib/admin-auth";
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
 
-  const adminEmail = process.env.ADMIN_EMAIL ?? "admin@sbmp.com";
-  const adminHash = process.env.ADMIN_PASSWORD_HASH;
+  const adminEmail = (process.env.ADMIN_EMAIL ?? "admin@sbmp.com").trim();
+  const adminHash = process.env.ADMIN_PASSWORD_HASH?.trim();
 
   if (!email || !password || email !== adminEmail || !adminHash) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
