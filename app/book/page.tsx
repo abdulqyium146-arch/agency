@@ -10,8 +10,17 @@ export const metadata: Metadata = {
   description: "Book a free strategy call with our digital marketing experts. Choose from SEO, Social Media, Google Ads, Website Development, Content Writing, and Email Marketing.",
 };
 
+const FALLBACK_SERVICES = [
+  { id: "seo", name: "SEO", slug: "seo", description: "Local & national search engine optimisation", duration: 60, price: 499, active: true, createdAt: new Date(), updatedAt: new Date() },
+  { id: "social-media", name: "Social Media Marketing", slug: "social-media", description: "Strategic social media management", duration: 60, price: 299, active: true, createdAt: new Date(), updatedAt: new Date() },
+  { id: "google-ads", name: "Google Ads", slug: "google-ads", description: "PPC campaign management", duration: 60, price: 399, active: true, createdAt: new Date(), updatedAt: new Date() },
+  { id: "web-development", name: "Website Development", slug: "web-development", description: "Custom website design & development", duration: 90, price: 1499, active: true, createdAt: new Date(), updatedAt: new Date() },
+  { id: "content-writing", name: "Content Writing", slug: "content-writing", description: "SEO-optimised blog & web copy", duration: 60, price: 199, active: true, createdAt: new Date(), updatedAt: new Date() },
+  { id: "email-marketing", name: "Email Marketing", slug: "email-marketing", description: "Email campaigns & automation", duration: 60, price: 249, active: true, createdAt: new Date(), updatedAt: new Date() },
+];
+
 export default async function BookPage() {
-  const services = await getServices();
+  const services = await getServices().catch(() => FALLBACK_SERVICES);
 
   return (
     <main className="min-h-screen bg-[#080D1A] py-16 px-4">

@@ -6,7 +6,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
+  const session = await auth().catch(() => null);
   if (!session) redirect("/admin/login");
 
   return (
