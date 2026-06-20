@@ -2,9 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
-function createPrismaClient() {
-  const connectionString = process.env.DATABASE_URL;
-  const pool = new Pool({ connectionString });
+declare global {
+  // eslint-disable-next-line no-var
+  var __prisma: PrismaClient | undefined;
+}
+
+function createPrismaClient(): PrismaClient {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({
     adapter,
@@ -12,10 +16,17 @@ function createPrismaClient() {
   });
 }
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+export function getPrismaClient(): PrismaClient {
+  if (!global.__prisma) {
+    global.__prisma = createPrismaClient();
+  }
+  return global.__prisma;
+}
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// Proxy so callers use `prisma.booking.findMany()` as before,
+// but the client is only instantiated on first actual use.
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop: string | symbol) {
+    return (getPrismaClient() as any)[prop];
+  },
+});

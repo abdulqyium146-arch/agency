@@ -1,15 +1,11 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
-import { loginSchema } from "@/lib/validations";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
   trustHost: true,
-  pages: {
-    signIn: "/admin/login",
-  },
+  pages: { signIn: "/admin/login" },
   providers: [
     Credentials({
       credentials: {
@@ -17,19 +13,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const parsed = loginSchema.safeParse(credentials);
-        if (!parsed.success) return null;
+        const email = credentials?.email as string;
+        const password = credentials?.password as string;
+        if (!email || !password) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: parsed.data.email },
-        });
+        const adminEmail = process.env.ADMIN_EMAIL ?? "admin@sbmp.com";
+        const adminHash = process.env.ADMIN_PASSWORD_HASH;
 
-        if (!user || !user.password) return null;
+        if (email !== adminEmail || !adminHash) return null;
 
-        const valid = await bcrypt.compare(parsed.data.password, user.password);
+        const valid = await bcrypt.compare(password, adminHash);
         if (!valid) return null;
 
-        return { id: user.id, email: user.email, name: user.name, role: user.role } as any;
+        return { id: "admin", email: adminEmail, name: "Admin", role: "ADMIN" };
       },
     }),
   ],
