@@ -179,21 +179,30 @@ export async function getServices() {
 }
 
 export async function getDashboardStats() {
-  const [total, pending, confirmed, completed, cancelled, todayCount] = await Promise.all([
+  const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+  const todayEnd = new Date(new Date().setHours(23, 59, 59, 999));
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+
+  const [total, pending, confirmed, completed, cancelled, todayCount, monthBookings, revenue, todayBookings] = await Promise.all([
     prisma.booking.count(),
     prisma.booking.count({ where: { status: "PENDING" } }),
     prisma.booking.count({ where: { status: "CONFIRMED" } }),
     prisma.booking.count({ where: { status: "COMPLETED" } }),
     prisma.booking.count({ where: { status: "CANCELLED" } }),
-    prisma.booking.count({
-      where: {
-        date: {
-          gte: new Date(new Date().setHours(0, 0, 0, 0)),
-          lt: new Date(new Date().setHours(23, 59, 59, 999)),
-        },
-      },
+    prisma.booking.count({ where: { date: { gte: todayStart, lte: todayEnd } } }),
+    prisma.booking.count({ where: { date: { gte: monthStart }, status: { not: "CANCELLED" } } }),
+    prisma.payment.aggregate({ where: { status: "PAID" }, _sum: { amount: true } }),
+    prisma.booking.findMany({
+      where: { date: { gte: todayStart, lte: todayEnd } },
+      include: { service: true },
+      orderBy: { time: "asc" },
     }),
   ]);
 
-  return { total, pending, confirmed, completed, cancelled, todayCount };
+  return {
+    total, pending, confirmed, completed, cancelled, todayCount,
+    monthBookings,
+    revenue: revenue._sum.amount ?? 0,
+    todayBookings,
+  };
 }
