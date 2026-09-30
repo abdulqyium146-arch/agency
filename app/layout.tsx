@@ -120,9 +120,6 @@ export const metadata: Metadata = {
     email: false,
     address: false,
   },
-  verification: {
-    google: "WFNVJO5ENxypWGEeimQW8DUO7tN6vJ8xuZ1iMw_Nudk",
-  },
 };
 
 export default function RootLayout({
