@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import ContactForm from "./ContactForm";
+import Link from "next/link";
 import { generateContactPointSchema, generateBreadcrumbSchema } from "@/lib/schemas";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
-const WA_LINK =
-  "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
+const CONTACT_EMAIL = "smallbusinessmarketing844@gmail.com";
 
 export const metadata: Metadata = {
   title: "Contact | Get Your Free SEO Audit Today",
   description:
-    "Get a free SEO audit worth £299. No obligation, no hard sell. Chat with us via WhatsApp or fill out the contact form. We're here to help UK service businesses grow.",
+    "Email us at smallbusinessmarketing844@gmail.com. Free SEO audit worth £299 — no obligation, no hard sell. We help UK service businesses rank on page 1 of Google.",
   keywords: ["contact SBMP", "free SEO audit", "UK digital marketing", "local SEO help"],
   alternates: {
     canonical: `${BASE_URL}/contact`,
@@ -17,19 +16,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact | Get Your Free SEO Audit Today",
     description:
-      "Get a free SEO audit worth £299. No obligation, no hard sell. Chat with us via WhatsApp or fill out the contact form.",
+      "Email us at smallbusinessmarketing844@gmail.com. Free SEO audit worth £299, no obligation.",
     url: `${BASE_URL}/contact`,
     type: "website",
   },
   twitter: {
     card: "summary",
     title: "Contact | Get Your Free SEO Audit Today",
-    description: "Get a free SEO audit. No obligation, no hard sell.",
+    description: "Email us for a free SEO audit. No obligation, no hard sell.",
   },
 };
 
 export default function ContactPage() {
-  const contactPointSchema = generateContactPointSchema();
+  const contactPointSchema = generateContactPointSchema(
+    "Customer Service",
+    undefined,
+    CONTACT_EMAIL
+  );
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: BASE_URL },
     { name: "Contact" },
@@ -41,18 +44,23 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([contactPointSchema, breadcrumbSchema]) }}
       />
-      {/* Hero strip */}
+
+      {/* Hero */}
       <div
         style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,142,247,0.18) 0%, transparent 70%), #080D1A",
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,142,247,0.18) 0%, transparent 70%), #080D1A",
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
         className="py-14 md:py-20"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white mb-5"
-            style={{ backgroundColor: "rgba(79,142,247,0.15)", border: "1px solid rgba(79,142,247,0.3)" }}
+            style={{
+              backgroundColor: "rgba(79,142,247,0.15)",
+              border: "1px solid rgba(79,142,247,0.3)",
+            }}
           >
             ⚡ Usually responds within 2 hours
           </div>
@@ -68,141 +76,121 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* LEFT: Contact info */}
-          <div>
+      {/* Email contact section */}
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        {/* Email card */}
+        <div
+          className="rounded-2xl p-8 flex gap-6"
+          style={{
+            backgroundColor: "#111E33",
+            border: "1px solid rgba(79,142,247,0.25)",
+            borderLeft: "4px solid #4F8EF7",
+            boxShadow: "0 4px 32px rgba(0,0,0,0.35)",
+          }}
+        >
+          <div className="text-4xl flex-shrink-0">✉️</div>
+          <div className="flex-1">
             <h2
-              className="text-3xl sm:text-4xl font-extrabold mb-4"
+              className="text-xl font-extrabold mb-2"
               style={{ fontFamily: "var(--font-display, sans-serif)", color: "#E2E8F0" }}
             >
-              Let&apos;s Talk About Growing Your Business
+              Email Us Directly
             </h2>
-            <p className="text-base leading-relaxed mb-10" style={{ color: "#8B9CB8" }}>
-              No hard sell, no jargon. Just an honest conversation about what your business needs and what&apos;s realistic.
+            <p className="text-sm mb-5 leading-relaxed" style={{ color: "#8B9CB8" }}>
+              Send us a message and we&apos;ll get back to you within 2 hours during business hours.
+              Tell us about your business and what you&apos;d like to achieve.
             </p>
-
-            <div className="space-y-5">
-              {/* WhatsApp card */}
-              <div
-                className="rounded-2xl p-6 flex gap-5"
-                style={{
-                  backgroundColor: "#111E33",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderLeft: "4px solid #22C55E",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div className="text-3xl flex-shrink-0">💬</div>
-                <div className="flex-1">
-                  <h3
-                    className="text-base font-bold mb-1"
-                    style={{ color: "#E2E8F0" }}
-                  >
-                    WhatsApp Me Directly
-                  </h3>
-                  <p className="text-sm mb-4" style={{ color: "#8B9CB8" }}>
-                    Most popular — I usually reply within minutes during business hours.
-                  </p>
-                  <a
-                    href={WA_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    style={{ backgroundColor: "#22C55E" }}
-                  >
-                    Open WhatsApp →
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone card */}
-              <div
-                className="rounded-2xl p-6 flex gap-5"
-                style={{
-                  backgroundColor: "#111E33",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderLeft: "4px solid #4F8EF7",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div className="text-3xl flex-shrink-0">📞</div>
-                <div className="flex-1">
-                  <h3
-                    className="text-base font-bold mb-1"
-                    style={{ color: "#E2E8F0" }}
-                  >
-                    Call Me
-                  </h3>
-                  <p className="text-lg font-semibold mb-1" style={{ color: "#E2E8F0" }}>
-                    03474825228
-                  </p>
-                  <p className="text-sm mb-4" style={{ color: "#8B9CB8" }}>
-                    Mon–Fri: 9am–6pm &nbsp;|&nbsp; Sat: 10am–2pm
-                  </p>
-                  <a
-                    href="tel:03474825228"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    style={{ backgroundColor: "#4F8EF7" }}
-                  >
-                    Call Now →
-                  </a>
-                </div>
-              </div>
-
-              {/* Response time card */}
-              <div
-                className="rounded-2xl p-6 flex gap-5"
-                style={{
-                  backgroundColor: "#111E33",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderLeft: "4px solid #FBBF24",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div className="text-3xl flex-shrink-0">⚡</div>
-                <div className="flex-1">
-                  <h3
-                    className="text-base font-bold mb-3"
-                    style={{ color: "#E2E8F0" }}
-                  >
-                    Response Time
-                  </h3>
-                  <ul className="space-y-1.5 text-sm" style={{ color: "#8B9CB8" }}>
-                    <li className="flex items-start gap-2">
-                      <span style={{ color: "#22C55E" }}>✓</span>
-                      <span><strong style={{ color: "#E2E8F0" }}>WhatsApp:</strong> Usually within minutes</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span style={{ color: "#22C55E" }}>✓</span>
-                      <span><strong style={{ color: "#E2E8F0" }}>Form submissions:</strong> Within 2 hours</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span style={{ color: "#22C55E" }}>✓</span>
-                      <span><strong style={{ color: "#E2E8F0" }}>Phone:</strong> Mon–Sat during business hours</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust row */}
-            <div
-              className="mt-8 flex items-center gap-3 px-5 py-3.5 rounded-xl"
-              style={{ backgroundColor: "rgba(79,142,247,0.08)", border: "1px solid rgba(79,142,247,0.20)" }}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-base transition-all hover:-translate-y-0.5 hover:shadow-xl"
+              style={{ backgroundColor: "#4F8EF7" }}
             >
-              <span className="text-lg">🔒</span>
-              <p className="text-sm font-medium" style={{ color: "#4F8EF7" }}>
-                Your details are safe. We never share or spam.
-              </p>
-            </div>
+              {CONTACT_EMAIL} →
+            </a>
           </div>
+        </div>
 
-          {/* RIGHT: Form */}
-          <div>
-            <ContactForm />
+        {/* Response time */}
+        <div
+          className="mt-6 rounded-2xl p-6 flex gap-5"
+          style={{
+            backgroundColor: "#111E33",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderLeft: "4px solid #FBBF24",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+          }}
+        >
+          <div className="text-3xl flex-shrink-0">⚡</div>
+          <div className="flex-1">
+            <h3
+              className="text-base font-bold mb-3"
+              style={{ color: "#E2E8F0" }}
+            >
+              What to Expect
+            </h3>
+            <ul className="space-y-2 text-sm" style={{ color: "#8B9CB8" }}>
+              <li className="flex items-start gap-2">
+                <span style={{ color: "#22C55E" }}>✓</span>
+                <span>
+                  <strong style={{ color: "#E2E8F0" }}>Response time:</strong> Within 2 hours Mon–Fri, same day Sat
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span style={{ color: "#22C55E" }}>✓</span>
+                <span>
+                  <strong style={{ color: "#E2E8F0" }}>Free audit:</strong> We&apos;ll review your online presence and send a personalised report
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span style={{ color: "#22C55E" }}>✓</span>
+                <span>
+                  <strong style={{ color: "#E2E8F0" }}>No obligation:</strong> Honest advice on what your business needs — no pressure to sign up
+                </span>
+              </li>
+            </ul>
           </div>
+        </div>
+
+        {/* Privacy note */}
+        <div
+          className="mt-6 flex items-center gap-3 px-5 py-3.5 rounded-xl"
+          style={{
+            backgroundColor: "rgba(79,142,247,0.08)",
+            border: "1px solid rgba(79,142,247,0.20)",
+          }}
+        >
+          <span className="text-lg">🔒</span>
+          <p className="text-sm font-medium" style={{ color: "#4F8EF7" }}>
+            Your details are safe. We never share or spam.
+          </p>
+        </div>
+
+        {/* Free audit CTA */}
+        <div
+          className="mt-10 rounded-2xl p-7 text-center"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(79,142,247,0.10) 0%, transparent 70%)",
+            border: "1px solid rgba(79,142,247,0.20)",
+          }}
+        >
+          <h3
+            className="text-xl font-extrabold mb-3"
+            style={{ fontFamily: "var(--font-display, sans-serif)", color: "#E2E8F0" }}
+          >
+            Want a Free Audit First?
+          </h3>
+          <p className="text-sm mb-5" style={{ color: "#8B9CB8" }}>
+            Fill out our free audit form and we&apos;ll send a personalised review of your Google
+            Business Profile, rankings, and competitor analysis — worth £299, completely free.
+          </p>
+          <Link
+            href="/free-audit"
+            className="inline-flex items-center px-7 py-3 rounded-xl font-semibold text-white text-sm transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            style={{ backgroundColor: "#4F8EF7" }}
+          >
+            Get My FREE Audit →
+          </Link>
         </div>
       </div>
     </div>
