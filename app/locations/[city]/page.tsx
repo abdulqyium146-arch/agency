@@ -24,21 +24,22 @@ export async function generateMetadata({
   const cityName = capitalize(city);
 
   return {
-    title: `Local Digital Marketing in ${cityName} | Expert SEO & Google Ads`,
-    description: `Get your ${cityName} service business to page 1 of Google. Expert local SEO, Google Ads & web design for ${cityName} businesses. From £199/month. Free audit.`,
+    title: `Digital Marketing Agency ${cityName} | Local SEO, PPC & Search Marketing`,
+    description: `Expert digital marketing agency in ${cityName}. Local SEO, PPC, Google Ads, search engine marketing & link building for ${cityName} small businesses. Free audit. From £199/month.`,
     keywords: [
+      `digital marketing agency ${cityName}`,
       `local SEO ${cityName}`,
-      `digital marketing ${cityName}`,
-      `Google Business Profile ${cityName}`,
+      `PPC agency ${cityName}`,
+      `search engine marketing ${cityName}`,
       `SEO agency ${cityName}`,
-      `${cityName} local marketing`,
+      `link building ${cityName}`,
     ],
     alternates: {
       canonical: `${BASE_URL}/locations/${city}`,
     },
     openGraph: {
-      title: `Local Digital Marketing in ${cityName} | Expert SEO & Google Ads`,
-      description: `Get your ${cityName} service business to page 1 of Google. Expert local SEO, Google Ads & web design.`,
+      title: `Digital Marketing Agency ${cityName} | Local SEO, PPC & Search Marketing`,
+      description: `Expert digital marketing agency in ${cityName}. Local SEO, Google Ads, PPC & search engine marketing. Free audit.`,
       url: `${BASE_URL}/locations/${city}`,
       type: "website",
     },

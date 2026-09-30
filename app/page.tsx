@@ -29,24 +29,24 @@ const FinalCTASection = dynamic(() => import("@/components/sections/FinalCTASect
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
 export const metadata: Metadata = {
-  title: "UK Local Digital Marketing Expert | Get More Customers",
+  title: "Local Business Marketing Agency UK | Small Business Marketing Expert",
   description:
-    "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses. No contracts. Free audit worth £299.",
+    "SBMP is a UK local business marketing agency for small businesses. Local SEO, Google Ads & Google Maps management from £199/month. 150+ businesses ranked. Free audit worth £299.",
   keywords: [
+    "local business marketing agency",
+    "small business marketing agency",
+    "local marketing expert UK",
     "local SEO UK",
+    "small business marketing services",
     "local digital marketing",
-    "Google Business Profile",
-    "UK service business marketing",
-    "local SEO agency",
-    "digital marketing",
   ],
   alternates: {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "UK Local Digital Marketing Expert | Get More Customers",
+    title: "Local Business Marketing Agency UK | Small Business Marketing Expert",
     description:
-      "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
+      "UK local business marketing agency. Local SEO, Google Ads & Google Maps for small businesses. From £199/month. 150+ businesses ranked.",
     url: BASE_URL,
     type: "website",
     siteName: "SBMP — Local Digital Marketing",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/sbmp-logo.png`,
         width: 1200,
         height: 630,
-        alt: "SBMP — Local Digital Marketing",
+        alt: "SBMP — Local Business Marketing Agency UK",
       },
     ],
   },
@@ -107,13 +107,30 @@ const faqSchema = {
   })),
 };
 
+// Person schema for E-E-A-T expert signals (targets "local marketing expert" queries)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alex Morgan",
+  jobTitle: "Local SEO Expert & Founder",
+  description: "UK local marketing expert with 10+ years helping small businesses rank on Google. Founder of SBMP — Small Business Marketing Professional.",
+  url: BASE_URL,
+  knowsAbout: ["Local SEO", "Google Business Profile", "Local Business Marketing", "Google Ads", "Digital Marketing for Small Businesses"],
+  worksFor: {
+    "@type": "Organization",
+    name: "SBMP — Small Business Marketing Professional",
+    url: BASE_URL,
+  },
+  sameAs: ["https://www.linkedin.com/"],
+};
+
 // Business & Website Schemas with @graph wrapper
 const rawSchemas = [
   generateComprehensiveLocalBusinessSchema(),
   generateWebSiteSchema(),
   generateWebPageSchema(
-    "UK Local Digital Marketing Expert | Get More Customers",
-    "Expert UK local digital marketing from £199/month. Local SEO, Google Ads & web design. Ranked 150+ businesses.",
+    "Local Business Marketing Agency UK | Small Business Marketing Expert",
+    "SBMP is a UK local business marketing agency for small businesses. Local SEO, Google Ads & Google Maps management from £199/month.",
     BASE_URL
   ),
   generatePricingSchema(),
@@ -145,6 +162,13 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(businessSchemas),
+        }}
+      />
+      {/* Person Schema — Expert/E-E-A-T signals */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personSchema),
         }}
       />
       <HeroSection />

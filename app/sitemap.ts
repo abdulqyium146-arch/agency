@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { cities, industriesSlugs, servicesSlugs } from "@/lib/data";
 import { locationSlugs } from "@/data/locations";
 import { serviceSlugs } from "@/data/services";
+import { blogPosts } from "@/data/blog-posts";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
@@ -41,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/blog`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.85,
     },
     {
       url: `${BASE_URL}/digital-marketing`,
@@ -139,7 +140,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/free-local-advertising`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${BASE_URL}/video-editing-services`,
@@ -210,11 +211,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // ── UK location pages (high priority — local rankings) ────────────────────
+  // Brighton: 15 impressions/8 queries in GSC. Manchester: 16 impressions. Bristol: prioritised.
+  const highPriorityCities = ["brighton", "manchester", "bristol"];
   const locationPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${BASE_URL}/locations/${city}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: city === "bristol" ? 0.93 : 0.8,
+    priority: highPriorityCities.includes(city) ? 0.93 : 0.8,
   }));
 
   // ── Automotive SEO — one per UK city ──────────────────────────────────────
@@ -225,12 +228,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  // ── Blog post pages ───────────────────────────────────────────────────────
+  const blogPostPages: MetadataRoute.Sitemap = blogPosts
+    .filter((post) => post.hasFullPost)
+    .map((post) => ({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.dateISO),
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    }));
+
   // ── Industry pages ────────────────────────────────────────────────────────
+  // Bump industries showing GSC impressions (cleaners pos 7, estate-agents 89, landscapers 51)
+  const highPerformingIndustries = ["cleaners", "estate-agents", "landscapers", "builders"];
   const industryPages: MetadataRoute.Sitemap = industries.map((slug) => ({
     url: `${BASE_URL}/industries/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.75,
+    priority: highPerformingIndustries.includes(slug) ? 0.87 : 0.75,
   }));
 
   // ── Local SEO city pages — 25 US cities ───────────────────────────────────
@@ -259,6 +274,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...servicePages,
     ...locationPages,
     ...automotiveSEOPages,
+    ...blogPostPages,
     ...industryPages,
     ...localSeoCityPages,
     ...localSeoServicePages,
