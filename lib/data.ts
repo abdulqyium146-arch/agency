@@ -48,19 +48,20 @@ export const services: Record<string, ServiceData> = {
     title: "Local SEO & Google Rankings",
     icon: "📍",
     tagline:
-      "Get your business to page 1 of Google when local customers search for your services.",
+      "Rank at the top of Google and Google Maps when local customers search for your service — and generate a consistent, measurable flow of new enquiries every month.",
     description:
-      "Local SEO is the single most powerful long-term strategy for UK service businesses. When someone in your area searches for 'plumber near me' or 'best dentist in Manchester', you want to be at the top. I use proven local SEO methods perfected over 5 years of focused results to get you there — and keep you there.",
+      "Local SEO is the highest-ROI long-term marketing channel for UK service businesses. When a homeowner or business owner in your area searches for the service you provide, they use Google — and they call the business at the top. Ranking in the Google Maps 3-pack and on page 1 of organic results is not optional for service businesses in 2025; it is the difference between a full diary and an empty one.\n\nThe three pillars of local SEO are your Google Business Profile (GBP), your website's on-page relevance signals, and your local citation and link profile. Google uses all three to decide which business to show in the Maps 3-pack for any local search. We optimise all three in a coordinated strategy — full GBP build and ongoing management, website technical SEO and content, and citation building across the directories Google uses to verify your business. Most clients see ranking movement within 30–60 days and strong page-1 positions within 90 days.",
     benefits: [
-      "Google Business Profile full optimisation",
-      "Maps 3-pack ranking strategy",
-      "Local citation building & cleanup",
-      "Geo-targeted keyword content",
-      "Competitor analysis & gap strategy",
-      "Monthly ranking reports",
+      "Google Business Profile full build, optimisation, and ongoing management",
+      "Maps 3-pack ranking strategy targeting your highest-value search terms",
+      "Local citation building across 40+ UK directories and trade sites",
+      "Geo-targeted service and location page content",
+      "Competitor gap analysis — we find what they rank for and take it",
+      "Review generation system targeting 4–8 new reviews per month",
+      "Monthly ranking report with positions tracked per keyword",
     ],
     results:
-      "Most clients see ranking movement within 30–60 days, with strong page-1 positions by month 3.",
+      "Most clients see ranking movement within 30–60 days. Strong page-1 and Maps 3-pack positions typically develop by month 3. Clients on the Growth plan average 3× more monthly enquiries within six months.",
     price: "From £199/month",
   },
   "google-ads": {

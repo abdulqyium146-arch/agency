@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { generateWebPageSchema, generateBreadcrumbSchema, generateItemListSchema, generateBlogPostingSchema } from "@/lib/schemas";
+import { blogPosts } from "@/data/blog-posts";
 
 const BASE_URL = "https://smallbusinessmarketingprofessional.com";
 
@@ -21,74 +22,7 @@ export const metadata: Metadata = {
 const WA_LINK =
   "https://wa.me/923474825228?text=Hi!%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20growing%20my%20business%20online.%20Can%20you%20help%3F";
 
-const posts = [
-  {
-    id: 1,
-    title: "How to Rank #1 on Google Maps in 2024 — The Complete Guide for UK Tradespeople",
-    category: "Local SEO",
-    readTime: "8 min",
-    date: "15 Jan 2024",
-    excerpt:
-      "Google Maps rankings are crucial for local service businesses. Here's the exact strategy I've used to rank 150+ UK businesses in the 3-pack...",
-    categoryColor: "#4F8EF7",
-    categoryBg: "rgba(79,142,247,0.12)",
-  },
-  {
-    id: 2,
-    title: "Why Your Google Business Profile Is Killing Your Leads (And How to Fix It)",
-    category: "Google Business Profile",
-    readTime: "5 min",
-    date: "28 Feb 2024",
-    excerpt:
-      "Most business owners set up their Google Business Profile once and forget it. Here are the 7 critical optimisations most businesses are missing...",
-    categoryColor: "#FB923C",
-    categoryBg: "rgba(251,146,60,0.10)",
-  },
-  {
-    id: 3,
-    title: "Local SEO vs Google Ads: Which Should UK Service Businesses Use in 2024?",
-    category: "Strategy",
-    readTime: "6 min",
-    date: "10 Mar 2024",
-    excerpt:
-      "The age-old question: should you invest in SEO or PPC? The answer isn't simple — it depends on your budget, timeline, and competition level...",
-    categoryColor: "#22C55E",
-    categoryBg: "rgba(34,197,94,0.12)",
-  },
-  {
-    id: 4,
-    title: "The Complete Guide to Getting 5-Star Google Reviews (Without Spamming Your Customers)",
-    category: "Reputation",
-    readTime: "4 min",
-    date: "22 Apr 2024",
-    excerpt:
-      "Online reviews are the #1 trust signal for local service businesses. Here's an ethical, effective system for generating a steady stream of 5-star reviews...",
-    categoryColor: "#FBBF24",
-    categoryBg: "rgba(251,191,36,0.10)",
-  },
-  {
-    id: 5,
-    title: "How Much Does Local SEO Cost in the UK? (Honest Breakdown for 2024)",
-    category: "Pricing",
-    readTime: "5 min",
-    date: "5 May 2024",
-    excerpt:
-      "Local SEO pricing in the UK ranges from £50/month to £5,000+. Here's an honest breakdown of what you actually need — and what's a waste of money...",
-    categoryColor: "#A78BFA",
-    categoryBg: "rgba(167,139,250,0.12)",
-  },
-  {
-    id: 6,
-    title: "Case Study: How a Birmingham Plumber Went from Page 4 to Position #1 in 8 Weeks",
-    category: "Case Study",
-    readTime: "7 min",
-    date: "18 Jun 2024",
-    excerpt:
-      "A real-world breakdown of exactly how I took a plumbing business from invisible to dominant in Birmingham's competitive local search market...",
-    categoryColor: "#22D3EE",
-    categoryBg: "rgba(34,211,238,0.10)",
-  },
-];
+const posts = blogPosts;
 
 export default function BlogPage() {
   const blogUrl = `${BASE_URL}/blog`;
@@ -106,7 +40,7 @@ export default function BlogPage() {
     posts.map((post, i) => ({
       position: i + 1,
       name: post.title,
-      url: `${blogUrl}#post-${post.id}`,
+      url: post.hasFullPost ? `${BASE_URL}/blog/${post.slug}` : `${blogUrl}#${post.slug}`,
       description: post.excerpt,
     }))
   );
@@ -114,7 +48,7 @@ export default function BlogPage() {
     generateBlogPostingSchema(
       post.title,
       post.excerpt,
-      `${blogUrl}#post-${post.id}`,
+      post.hasFullPost ? `${BASE_URL}/blog/${post.slug}` : `${blogUrl}#${post.slug}`,
       post.date,
       post.category
     )
@@ -161,7 +95,7 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
               <article
-                key={post.id}
+                key={post.slug}
                 className="rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 card-hover-blue"
                 style={{
                   backgroundColor: "#111E33",
@@ -212,13 +146,17 @@ export default function BlogPage() {
                       <span>•</span>
                       <span>{post.date}</span>
                     </div>
-                    <Link
-                      href="#"
-                      className="text-sm font-semibold transition-colors hover:underline"
-                      style={{ color: "#4F8EF7" }}
-                    >
-                      Read More →
-                    </Link>
+                    {post.hasFullPost ? (
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="text-sm font-semibold transition-colors hover:underline"
+                        style={{ color: "#4F8EF7" }}
+                      >
+                        Read More →
+                      </Link>
+                    ) : (
+                      <span className="text-xs" style={{ color: "#4A5A6E" }}>Coming soon</span>
+                    )}
                   </div>
                 </div>
               </article>

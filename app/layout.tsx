@@ -107,6 +107,9 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.json",
+  verification: {
+    google: "SdggT9Mo3Xkopl1LOGNJwam-pNsmC9HuApKTkZccJu4",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
